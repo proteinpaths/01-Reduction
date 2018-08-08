@@ -1,15 +1,15 @@
 #!/usr/bin/Rscript
 
-library (bio3d)
+#library (bio3d)
 library (parallel)
 options (warn=0)
 
-MC_CORES=1
+nCores=1
 
 # Creates a .pdf plot for a protein trajectory o pathway
 # The input is either a compressed (.tgz) trajectory or
 # a directory name with the PDBs files inside it.
-USAGE="plot-pathway-tmscore.R <input pathway dir> [output dir]\n"
+USAGE="plot-pathway-tmscore.R <input pathway dir> [nCores=1]\n"
 #--------------------------------------------------------------
 # Main function
 #--------------------------------------------------------------
@@ -22,7 +22,7 @@ main <- function () {
 	pathname  = args [1]
 	outputDir = getwd ()
 	if (length (args) == 2)
-		outputDir = args [2]
+		nCores = args [2]
 
 	filenames  = getInOutNames (pathname, outputDir)
 	inputDir   = filenames$inputDir
@@ -33,7 +33,7 @@ main <- function () {
 	files      = getPDBFiles (pathname)
 	
 	cat ("\nCalculating RMSDs...")	
-	values     = parallelTmscorePathway (files$n, files$native, files$pdbs)
+	values     = parallelTmscorePathway (files$n, files$native, files$pdbs, nCores)
 
 	cat ("\nWriting output file ", outputFile, "\n")
 	plotPathway (values, outputFile)
@@ -42,9 +42,9 @@ main <- function () {
 #--------------------------------------------------------------
 # Calculate the RMSD between two protein structures
 #--------------------------------------------------------------
-parallelTmscorePathway <- function (n, native, pdbs) {
+parallelTmscorePathway <- function (n, native, pdbs, nCores) {
 	values = mclapply (pdbs, calculateTmscore, native, 
-					  mc.preschedule=T, mc.set.seed=T, mc.cores=4)
+					  mc.preschedule=T, mc.set.seed=T, mc.cores=nCores)
 	return (values)
 }
 	

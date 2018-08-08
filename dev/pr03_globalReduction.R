@@ -13,7 +13,7 @@
 #----------------------------------------------------------
 USAGE="USAGE: global.R <inputDir> <outputDir> <tmpDir> <K> <num cores>\n" 
 
-library (bio3d)
+#library (bio3d)
 library (parallel)
 library (cluster)
 options (width=300)
