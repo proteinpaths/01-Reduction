@@ -30,8 +30,8 @@ def main (args):
 
 	inputDir  = args [1]
 	outputDir = args [2]
-	threshold = float (args [3])
-	SIZEBIN   = int (args [4])
+	SIZEBIN   = int (args [3])
+	threshold = float (args [4])
 	K         = int (args [5])
 	NCORES	  = int (args [6])
 
@@ -40,17 +40,17 @@ def main (args):
 	outputDirGlobal = outputDir + "/pdbsGlobal"
 	tmpDir          = outputDir 
 
-	print "Parameters: "
-	print "\t Input dir: ", inputDir
-	print "\t Output dir bins: ", outputDirBins
-	print "\t RMSD threshold: ", threshold
-	print "\t SIZE OF BINS: ", SIZEBIN
-	print "\t K: ", K
-	print "\t NUM CORES : ", NCORES
+	print "Parameters:"
+	print "\t Input dir:          ", inputDir
+	print "\t Output dir bins:    ", outputDirBins
+	print "\t Size of bins: i     ", SIZEBIN
+	print "\t TM-score threshold: ", threshold
+	print "\t K:                  ", K
+	print "\t NUM CORES :         ", NCORES
 	print "\n"
 
 	createDir (outputDir)
-	writeLog (outputDir, inputDir, threshold, K)
+	writeLog (outputDir, inputDir, SIZEBIN, threshold, K)
 
 	# Split full trajectory in bins (blocks of 1000 pdbs)
 	cmm ="pr01_createBins.py %s %s %s" % (inputDir, outputDirBins, SIZEBIN)
@@ -75,7 +75,6 @@ def createDir (dir):
 			oldDir = os.path.join (headDir, "old-" + tailDir)
 			if os.path.lexists (oldDir):
 					checkExistingDir (oldDir)
-
 			os.rename (dir, oldDir)
 	checkExistingDir (dir)
 	os.system ("mkdir %s" % dir)
@@ -84,9 +83,10 @@ def createDir (dir):
 # Call main with input parameter
 #------------------------------------------------------------------
 #------------------------------------------------------------------
-def writeLog (outputDir, proteinName, threshold, k):   
+def writeLog (outputDir, proteinName, sizeOfBins, threshold, k):   
 	inFile = open (outputDir+"/params.txt", "a")
 	inFile.write ("Protein name: " + os.path.basename (proteinName) + "\n")
+	inFile.write ("Size of bins : " + str (sizeOfBins) + "\n")
 	inFile.write ("TM-score trhreshold : " + str (threshold) + "\n")
 	inFile.write ("K representatives : " + str (k) + "\n")
 	inFile.close ()

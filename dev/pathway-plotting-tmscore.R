@@ -61,12 +61,13 @@ calculateTmscore <- function (targetProtein, referenceProtein) {
 # Creata a XY plot from the RMSD values of each conformation
 #-------------------------------------------------------------
 plotPathway <- function (rmsdValues, outputFile) {
-	pdf (outputFile, width=14)
+	pdf (outputFile, width=20)
 		n = length(rmsdValues)
 		rd = rmsdValues[1:(n-1)]
 		time = 1:(n-1)
-		plot(time, rd, typ = "l", ylab = "TM-score", xlab = "Frame No.")
-		points (lowess(time,rd, f=2/10), typ="l", col="red", lty=2, lwd=2)
+		plot(time, rd, typ = "l", ylab = "TM-score", xlab = "Frame No.", cex.axis=1.5,cex.lab=1.5,
+		     mar=c(5,4,2,2)+0.4)
+		#points (lowess(time,rd, f=2/10), typ="l", col="red", lty=2, lwd=2)
 		#steps = n / 21
 		#xPoints = seq (0,n, ceiling (steps))
 		#axis (side=1, xPoints)

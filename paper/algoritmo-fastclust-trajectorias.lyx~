@@ -87,6 +87,39 @@ Algoritmo Rápido de Clustering para Trajectorias de Plegamiento de Proteínas
 Introducción
 \end_layout
 
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/ppath/01-Reduction/dev/res/1FCA1-40b05t02k/1FCA1.pdf
+	lyxscale 30
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/ppath/01-Reduction/dev/res/1FCA1-40b05t02k/pdbsLocal.pdf
+	lyxscale 30
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Graphics
+	filename /home/ppath/01-Reduction/dev/res/1FCA1-40b05t02k/pdbsGlobal.pdf
+	lyxscale 30
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Description
 Contexto: Actualmente se están liberando con más frecuencia datos de simulacione
 s de plegamiento de proteínas para que la comunidad científica los analice
@@ -1036,6 +1069,7 @@ Resultados
 A continuación presentamos los resultados de la reducción a algunas trayectorias
  de simulación de plegamiento de proteínas de dos fuentes distintas que
  usan distintos métodos de simulación.
+ La primera corresponde a las simulaciones creadas por el grupo de 
 \end_layout
 
 \begin_layout Section
