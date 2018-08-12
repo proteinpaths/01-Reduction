@@ -15,8 +15,8 @@ LOG: r1.2 (Aug3): Added K for global clustering
    <N Cores>	    Number of cores to use for paralelizing the procedure
 """
 USAGE  = "\nReduces a trayectory using a fast clustering"
-USAGE += "\nUSAGE   : pr00_main.py <inputDir> <outputDir> <TMSCORE> <SizeBin> <K> <nCores>"
-USAGE += "\nExample : pr00_main.py in out 1.5 40 2 4"
+USAGE += "\nUSAGE   : pr00_main.py <inputDir> <outputDir> <SizeBin> <TMSCORE> <K> <nCores>"
+USAGE += "\nExample : pr00_main.py in out 40 0.5 5 4"
 
 # Default values
 threshold = 0.5   # TM-score threshold for comparisons between protein structures"
@@ -24,7 +24,8 @@ SIZEBIN   = 40	# Number of files for each bin
 NCORES	  = 2	  # Number of cores for multiprocessing
 
 def main (args):
-	if len (args) < 7:
+	print (len (args))
+	if len (args) < 6:
 		print USAGE
 		sys.exit (1)
 
