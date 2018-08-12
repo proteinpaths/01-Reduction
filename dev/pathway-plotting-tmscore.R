@@ -1,5 +1,7 @@
 #!/usr/bin/Rscript
 
+# Log: 11-08:  Added a parameter for the native protein reference
+
 #library (bio3d)
 library (parallel)
 options (warn=0)
@@ -9,20 +11,21 @@ nCores=1
 # Creates a .pdf plot for a protein trajectory o pathway
 # The input is either a compressed (.tgz) trajectory or
 # a directory name with the PDBs files inside it.
-USAGE="plot-pathway-tmscore.R <input pathway dir> [nCores=1]\n"
+USAGE="plot-pathway-tmscore.R <Reference Native> <input pathway dir> [nCores=1]\n"
 #--------------------------------------------------------------
 # Main function
 #--------------------------------------------------------------
 main <- function () {
 	args = commandArgs (TRUE)
-	if (length (args) < 0) {
+	if (length (args) < 2) {
 		cat (USAGE)
 		quit ()
 	}
-	pathname  = args [1]
-	outputDir = getwd ()
-	if (length (args) == 2)
-		nCores = args [2]
+	referenceProtein = args [1]
+	pathname         = args [2]
+	outputDir        = getwd ()
+	if (length (args) == 3)
+		nCores = args [3]
 
 	filenames  = getInOutNames (pathname, outputDir)
 	inputDir   = filenames$inputDir
@@ -30,7 +33,7 @@ main <- function () {
 
 	# Extract or load filename to calculate RMSDs
 	cat ("\nLoading PDBs from ", pathname, "...\n")
-	files      = getPDBFiles (pathname)
+	files      = getPDBFiles (pathname, referenceProtein)
 	
 	cat ("\nCalculating RMSDs...")	
 	values     = parallelTmscorePathway (files$n, files$native, files$pdbs, nCores)
@@ -77,7 +80,7 @@ plotPathway <- function (rmsdValues, outputFile) {
 #--------------------------------------------------------------
 # Get the PDB files from either a compressed file or a dir
 #--------------------------------------------------------------
-getPDBFiles <- function (pathname) {
+getPDBFiles <- function (pathname, referenceProtein) {
 
 	# Extracts to an inputDir 
 	if (grepl ("gz", pathname)==T) {
@@ -91,10 +94,10 @@ getPDBFiles <- function (pathname) {
 	#inputFilesFull = sapply (inputFiles, function (x) paste (inputDir, x, sep="/"))
 	inputFilesFull = list.files (inputDir, full.names=T)
 	n = length (inputFilesFull)
-	native = inputFilesFull [[n]]
+	#native = inputFilesFull [[n]]
 	outfile = paste (inputDir, ".pdf", sep="")
 
-	return (list (n=n, native=native, pdbs=inputFilesFull, outfile=outfile))
+	return (list (n=n, native=referenceProtein, pdbs=inputFilesFull, outfile=outfile))
 }
 
 #--------------------------------------------------------------

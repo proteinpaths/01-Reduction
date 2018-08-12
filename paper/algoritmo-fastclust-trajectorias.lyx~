@@ -91,7 +91,7 @@ Introducción
 \begin_inset Graphics
 	filename /home/ppath/01-Reduction/dev/res/1FCA1-40b05t02k/1FCA1.pdf
 	lyxscale 30
-	scale 50
+	scale 35
 
 \end_inset
 
@@ -102,7 +102,7 @@ Introducción
 \begin_inset Graphics
 	filename /home/ppath/01-Reduction/dev/res/1FCA1-40b05t02k/pdbsLocal.pdf
 	lyxscale 30
-	scale 50
+	scale 35
 
 \end_inset
 
@@ -113,7 +113,7 @@ Introducción
 \begin_inset Graphics
 	filename /home/ppath/01-Reduction/dev/res/1FCA1-40b05t02k/pdbsGlobal.pdf
 	lyxscale 30
-	scale 50
+	scale 35
 
 \end_inset
 
@@ -1077,16 +1077,16 @@ Detalles de Implementación
 \end_layout
 
 \begin_layout Standard
-El algoritmo está implementado como a través de tres scripts: 
+El algoritmo está implementado a través de tres scripts: 
 \end_layout
 
 \begin_layout Itemize
 pr00_main.py: Script principal en lenguaje Python que toma los parámetros
- iniciales y llama a los otros scripts envíandole los parámetros necesarios.
+ iniciales y llama a los otros scripts enviándoles los parámetros necesarios.
 \end_layout
 
 \begin_layout Itemize
-pr01_createBins.py: Script en lenguaje Python que realiza la partición
+pr01_createBins.py: Script en lenguaje Python que realiza las particiones
 \end_layout
 
 \begin_layout Itemize
@@ -1094,20 +1094,132 @@ pr02_localReduction.R : Script en lenguaje R que realiza la reducción local.
 \end_layout
 
 \begin_layout Itemize
-pr03_globalReduction.R: Script en lenguaje R que realiza la redución global..
+pr03_globalReduction.R: Script en lenguaje R que realiza la reducción global.
 \end_layout
 
 \begin_layout Standard
-La reducción local utiliza la función 
+La ejecución se realiza llamando solo al primer script 
 \emph on
-rmsd 
+pr00_main.py
 \emph default
-de la librería 
+ con los siguientes parámetros:
+\end_layout
+
+\begin_layout Description
+Input
+\begin_inset space ~
+\end_inset
+
+Dir: Nombre del directorio de entrada donde están las conformaciones de
+ la trayectoría de la proteína a reducir.
+\end_layout
+
+\begin_layout Description
+Output
+\begin_inset space ~
+\end_inset
+
+Dir: Nombre del directorio donde quedarán los resultados de la reducción.
+ Si el directorio ya existe lo renombra automáticamente y crea uno nuevo.
+ Dentro del directorio se crean cuatro subdirectorios:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+bins: donde se crean las particiones con las conformaciones correspondientes
+ a cada bin
+\end_layout
+
+\begin_layout Itemize
+binsLocal: donde se crean las nuevas particiones con los resultados de la
+ reducción local
+\end_layout
+
+\begin_layout Itemize
+pdbsLocal donde se copian todas las conformaciones de la nueva trayectoria
+ producto de la reducción local.
+\end_layout
+
+\begin_layout Itemize
+pdbsGlobal: donde se copian todas las conformaciones de la nueva trayectoria
+ producto de la reducción global.
+\end_layout
+
+\begin_layout Itemize
+tmp: donde se coloca los archivos temporales resultantes de la creación
+ de las matrices de distancia con TM-score
+\end_layout
+
+\end_deeper
+\begin_layout Description
+Bin
+\begin_inset space ~
+\end_inset
+
+Size: El tamaño de conformaciones por partición o 
 \emph on
-bio3d
+bin.
+
 \emph default
- para el sistema R, y la reducción global utiliza el programa TMscore [http://cs
-sb.biology.gatech.edu/skolnick/webservice/TM-score/index.shtml]
+ El algoritmo crea el número de 
+\emph on
+bins 
+\emph default
+dependiendo del tamaño de la trayectoria.
+\end_layout
+
+\begin_layout Description
+Threshold: Umbral usado por el TM-score para comparar dos conformaciones
+ y decidir si son similares.
+\end_layout
+
+\begin_layout Description
+K: Número de conformaciones a seleccionar por el agrupamiento global
+\end_layout
+
+\begin_layout Description
+nCores: Número de 
+\emph on
+cores
+\emph default
+ a utilizar para el procesamiento en paralelo.
+\end_layout
+
+\begin_layout Standard
+Para la graficación de las trayectorias está el 
+\emph on
+script
+\emph default
+ "pathway-plotting-tmscore.R", los parámetros son:
+\end_layout
+
+\begin_layout Description
+Native
+\begin_inset space ~
+\end_inset
+
+Reference: Nombre del archivo de la proteína nativa a usar como referencia
+ en las comparaciones con el TM-score
+\end_layout
+
+\begin_layout Description
+Input
+\begin_inset space ~
+\end_inset
+
+Dir: Directorio de entrada con las conformaciones de la proteína a gráficar
+\end_layout
+
+\begin_layout Description
+nCores: Número de 
+\emph on
+cores
+\emph default
+ a utilizar para realizar los cálculos en paralelo.
+\end_layout
+
+\begin_layout Subsection
+Instrucciones de Uso del Software
 \end_layout
 
 \begin_layout Section

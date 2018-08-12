@@ -1,5 +1,7 @@
 #!/usr/bin/Rscript
 
+# Log: 11-08: Added Native Reference as parameter
+
 library (bio3d)
 library (parallel)
 options (warn=0)
