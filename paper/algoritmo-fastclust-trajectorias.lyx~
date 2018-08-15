@@ -1215,7 +1215,11 @@ nCores: Número de
 \emph on
 cores
 \emph default
- a utilizar para realizar los cálculos en paralelo.
+ a utilizar para ejecutar el 
+\emph on
+script
+\emph default
+ en paralelo.
 \end_layout
 
 \begin_layout Subsection

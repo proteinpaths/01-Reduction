@@ -1076,7 +1076,30 @@ A continuación presentamos los resultados de la reducción a algunas trayectori
 Detalles de Implementación
 \end_layout
 
+\begin_layout Subsection
+Descripción de Programas
+\end_layout
+
 \begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
 El algoritmo está implementado a través de tres scripts: 
 \end_layout
 
@@ -1097,7 +1120,11 @@ pr02_localReduction.R : Script en lenguaje R que realiza la reducción local.
 pr03_globalReduction.R: Script en lenguaje R que realiza la reducción global.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Subsection
+Ejecución
+\end_layout
+
+\begin_layout Plain Layout
 La ejecución se realiza llamando solo al primer script 
 \emph on
 pr00_main.py
@@ -1185,7 +1212,7 @@ cores
  a utilizar para el procesamiento en paralelo.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Para la graficación de las trayectorias está el 
 \emph on
 script
@@ -1223,7 +1250,26 @@ script
 \end_layout
 
 \begin_layout Subsection
-Instrucciones de Uso del Software
+Requisitos
+\end_layout
+
+\begin_layout Plain Layout
+Los programas están en python y en R.
+ Del sistema R se necesita instalar las librería para agrupamientos y paraleliza
+ción: 
+\emph on
+cluster 
+\emph default
+y 
+\emph on
+parallel
+\emph default
+, respectivamente.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section

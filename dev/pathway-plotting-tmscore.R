@@ -1,6 +1,9 @@
 #!/usr/bin/Rscript
 
-# Log: 11-08:  Added a parameter for the native protein reference
+# Log: 11-08:  
+	# r1.4(Aug13) Fixed ranges when get values for plotting
+	# r1.3(Aug13) Added a fixed range for y-axis
+	# r1.2: Added a parameter for the native protein reference
 
 #library (bio3d)
 library (parallel)
@@ -17,7 +20,7 @@ USAGE="plot-pathway-tmscore.R <Reference Native> <input pathway dir> [nCores=1]\
 #--------------------------------------------------------------
 main <- function () {
 	args = commandArgs (TRUE)
-	if (length (args) < 2) {
+	if (length (args) < 3) {
 		cat (USAGE)
 		quit ()
 	}
@@ -64,12 +67,18 @@ calculateTmscore <- function (targetProtein, referenceProtein) {
 # Creata a XY plot from the RMSD values of each conformation
 #-------------------------------------------------------------
 plotPathway <- function (rmsdValues, outputFile) {
-	pdf (outputFile, width=20)
+	#pdf (outputFile, width=20)
+	pdf (outputFile, width=14)
 		n = length(rmsdValues)
-		rd = rmsdValues[1:(n-1)]
-		time = 1:(n-1)
-		plot(time, rd, typ = "l", ylab = "TM-score", xlab = "Frame No.", cex.axis=1.5,cex.lab=1.5,
-		     mar=c(5,4,2,2)+0.4)
+		rd = rmsdValues[1:n]
+		time = 0:(n-1)
+		plot(time, rd, typ = "l", ylab = "TM-score", xlab = "Frame No.", 
+			 cex.axis=1.5,cex.lab=1.5,
+		     mar=c(5,4,2,2)+0.4,
+			 axes=TRUE, ylim=range(c(0,1)))
+
+		#x = c(0.1, 0.2,0.3, 0.4, 0.6, 0.8, 1,2)
+		#axis (side=2, at = x, labels=x)
 		#points (lowess(time,rd, f=2/10), typ="l", col="red", lty=2, lwd=2)
 		#steps = n / 21
 		#xPoints = seq (0,n, ceiling (steps))

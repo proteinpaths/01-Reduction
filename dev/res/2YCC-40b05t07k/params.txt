@@ -1,0 +1,4 @@
+Protein name: 2YCC
+Size of bins : 40
+TM-score trhreshold : 0.5
+K representatives : 7

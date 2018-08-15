@@ -1,7 +1,9 @@
 #!/usr/bin/Rscript
 #!/home/mmartinez/bin/Rscript
 
-# LOG: r1.2 (Aug3): Extracts K medoids and users TM-score instead RMSD
+# LOG: 
+#	r1.3 (Aug13): Fixed error when it gets number of pdbs < K
+#	r1.2 (Aug3): Extracts K medoids and users TM-score instead RMSD
 
 #----------------------------------------------------------
 # Makes a detailed global clustering of protein conformations 
@@ -80,7 +82,7 @@ reduceGlobal <- function (inputBinPath, outputDir, tmpDir, K) {
 	if (nPdbs < 2)
 		medoids = 1
 	else if (nPdbs <= K)
-		medoids = seq (K)
+		medoids = seq (nPdbs)
 	else {
 		binDir = inputBinPath
 		print (binDir)
