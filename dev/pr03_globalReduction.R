@@ -2,6 +2,7 @@
 #!/home/mmartinez/bin/Rscript
 
 # LOG: 
+#	r1.4 (Aug16): Modified clustering with initial medoids including the last pdb
 #	r1.3 (Aug13): Fixed error when it gets number of pdbs < K
 #	r1.2 (Aug3): Extracts K medoids and users TM-score instead RMSD
 
@@ -22,6 +23,7 @@ options (width=300)
 
 #THRESHOLD = 1.3
 #NCORES= 1
+lastPdb=""
 #----------------------------------------------------------
 # Main function
 #----------------------------------------------------------
@@ -55,19 +57,6 @@ main <- function () {
 }
 
 #----------------------------------------------------------
-# Make links of the selected PDBs into the output dir
-#----------------------------------------------------------
-writeClusteringResults <- function (clusteringResults, outputDir) {
-	for (binResults in clusteringResults) 
-		for (pdbPath in binResults) {
-			cmm <- sprintf ("ln -s %s/%s %s/%s", getwd(),
-									 pdbPath, outputDir, basename (pdbPath))
-			cat (paste (">>> ", cmm, "\n"))
-			system (cmm)
-		}
-}
-
-#----------------------------------------------------------
 # Reduction function to reduce a single bin
 # Clustering around medoids. Return k medoid for the bin
 #----------------------------------------------------------
@@ -87,12 +76,27 @@ reduceGlobal <- function (inputBinPath, outputDir, tmpDir, K) {
 		binDir = inputBinPath
 		print (binDir)
 		TMscoreDistanceMatrix <- getTMDistanceMatrix (binDir, tmpDir)
-		pamPDBs               <- pam (TMscoreDistanceMatrix, k=K, diss=F)
+		split                 <- -1 * nPdbs / K
+		initialMedoids        <- round (seq (nPdbs, 1, split))
+		pamPDBs               <- pam (TMscoreDistanceMatrix, k=K, diss=F, medoids=initialMedoids)
 		medoids               <- pamPDBs$id.med
 	}
-					
+
 	medoidName <- listOfPDBPaths [medoids]
 	return (medoidName)
+}
+
+#----------------------------------------------------------
+# Make links of the selected PDBs into the output dir
+#----------------------------------------------------------
+writeClusteringResults <- function (clusteringResults, outputDir) {
+	for (binResults in clusteringResults) 
+		for (pdbPath in binResults) {
+			cmm <- sprintf ("ln -s %s/%s %s/%s", getwd(),
+									 pdbPath, outputDir, basename (pdbPath))
+			#cat (paste (">>> ", cmm, "\n"))
+			system (cmm)
+		}
 }
 
 #--------------------------------------------------------------
@@ -105,6 +109,7 @@ getTMDistanceMatrix <- function (inputBinDir, outputBinDir) {
 	distanceMatrixTM =  as.dist (matrixTM)
 	return (distanceMatrixTM)
 }
+
 
 #----------------------------------------------------------
 # Create dir, if it exists the it is renamed old-XXX
@@ -126,6 +131,8 @@ createDir <- function (newDir) {
 	checkOldDir (newDir)
 	system (sprintf ("mkdir %s", newDir))
 }
+
+
 
 #--------------------------------------------------------------
 #--------------------------------------------------------------

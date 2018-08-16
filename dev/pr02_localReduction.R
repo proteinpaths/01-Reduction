@@ -60,7 +60,7 @@ writeClusteringResults <- function (clusteringResults, outputDir) {
 		for (pdbPath in binResults) {
 			cmm <- sprintf ("ln -s %s/%s %s/%s", getwd(),
 									 pdbPath, outputDir, basename (pdbPath))
-			cat (paste (">>> ", cmm, "\n"))
+			#cat (paste (">>> ", cmm, "\n"))
 			system (cmm)
 		}
 }
@@ -89,16 +89,17 @@ reduceLocal <- function (inputBinPath, outputDir, threshold) {
 #----------------------------------------------------------
 fastClustering <- function (inputBinPath, outputBinPath, threshold, inputProteinsLst) {
 	n = length (inputProteinsLst)
-	targetProteinPath  = inputProteinsLst [[1]]
+	targetProteinPath  = inputProteinsLst [[n]]
 	headProteinPath    = targetProteinPath   # Default head for the first group
 	tmscoreValue       = -1  # To create the link for the first group
 	listOfSelectedPdbs = list()
-	for (k in 1:n) {
+	for (k in n:1) {
 		if (tmscoreValue < threshold) {
 			listOfSelectedPdbs = append (listOfSelectedPdbs, targetProteinPath)
 			cmm = sprintf ("ln -s %s/%s %s/%s", getwd(), targetProteinPath, 
 							outputBinPath, basename (targetProteinPath))
-			cat ("\n>>>",cmm); system (cmm)
+			#cat ("\n>>>",cmm); 
+			system (cmm)
 			headProteinPath = targetProteinPath
 		}
 

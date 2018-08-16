@@ -21,7 +21,7 @@ def main ():
     currentDir = os.getcwd()
 
     value = tmscore (pdbReference, pdbTarget, currentDir)
-    print >> sys.stderr, os.path.basename (pdbReference), os.path.basename(pdbTarget), value
+    #print >> sys.stderr, os.path.basename (pdbReference), os.path.basename(pdbTarget), value
 
     print value
 

@@ -38,7 +38,7 @@ main <- function () {
 	cat ("\nLoading PDBs from ", pathname, "...\n")
 	files      = getPDBFiles (pathname, referenceProtein)
 	
-	cat ("\nCalculating RMSDs...")	
+	cat ("\nCalculating TMscores")	
 	values     = parallelTmscorePathway (files$n, files$native, files$pdbs, nCores)
 
 	cat ("\nWriting output file ", outputFile, "\n")
@@ -68,7 +68,7 @@ calculateTmscore <- function (targetProtein, referenceProtein) {
 #-------------------------------------------------------------
 plotPathway <- function (rmsdValues, outputFile) {
 	#pdf (outputFile, width=20)
-	pdf (outputFile, width=14)
+	pdf (outputFile, width=20)
 		n = length(rmsdValues)
 		rd = rmsdValues[1:n]
 		time = 0:(n-1)
