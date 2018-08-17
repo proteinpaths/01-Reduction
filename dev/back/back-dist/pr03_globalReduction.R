@@ -2,7 +2,6 @@
 #!/home/mmartinez/bin/Rscript
 
 # LOG: 
-#	r2.0 (Aug17): Changed distance matrix calculation, now direct call using proxy::dist 
 #	r1.4 (Aug16): Modified clustering with initial medoids including the last pdb
 #	r1.3 (Aug13): Fixed error when it gets number of pdbs < K
 #	r1.2 (Aug3): Extracts K medoids and users TM-score instead RMSD
@@ -47,11 +46,11 @@ main <- function () {
 	createDir (OUTPUTDIR)
 	createDir (tmpDir)
 
-	cat ("\n>>> Main of Global Reduction...\n")
+	print ("\n FULL")
 	print (OUTPUTDIR)
 	listOfBinPaths    = list.files (INPUTDIR, pattern="bin", full.names=T)
 	clusteringResults = mclapply (listOfBinPaths, reduceGlobal, 
-	                    outputDir=OUTPUTDIR, tmpDir=tmpDir, K, mc.cores=NCORES)
+							outputDir=OUTPUTDIR, tmpDir=tmpDir, K, mc.cores=NCORES)
 
 	cat ("\nRESULTS MCLAPPLY\n")
 	writeClusteringResults (clusteringResults, OUTPUTDIR)
@@ -65,7 +64,7 @@ reduceGlobal <- function (inputBinPath, outputDir, tmpDir, K) {
 	cat ("\n>>> Global Reducing ", inputBinPath )
 
 	# Fast clustering for bin, writes representatives to clusDir
-	listOfPDBPaths <<- list.files (inputBinPath, pattern=".pdb", full.names=T)
+	listOfPDBPaths <- list.files (inputBinPath, pattern=".pdb", full.names=T)
 
   # Clustering around medoids. Return one medoid for all inputs
 	nPdbs = length (listOfPDBPaths)
@@ -75,7 +74,8 @@ reduceGlobal <- function (inputBinPath, outputDir, tmpDir, K) {
 		medoids = seq (nPdbs)
 	else {
 		binDir = inputBinPath
-		distanceMatrix <- getTMDistanceMatrix (binDir, listOfPDBPaths)
+		print (binDir)
+		distanceMatrix <- getTMDistanceMatrix (binDir, tmpDir)
 		split          <- -1 * nPdbs / K
 		initialMedoids <- round (seq (nPdbs, 1, split))
 		pamPDBs        <- pam (distanceMatrix, k=K, diss=F, medoids=initialMedoids)
@@ -84,32 +84,6 @@ reduceGlobal <- function (inputBinPath, outputDir, tmpDir, K) {
 
 	medoidName <- listOfPDBPaths [medoids]
 	return (medoidName)
-}
-
-#--------------------------------------------------------------
-# Calculate pairwise using TM-score distance
-#--------------------------------------------------------------
-getTMDistanceMatrix <- function (inputBinDir, listOfPDBPaths) {
-	n = length (listOfPDBPaths)
-	mat = matrix (seq (1,n))
-
-	distMat = proxy::dist (mat, method=calculateTmscore)
-	return (distMat)
-}
-
-#----------------------------------------------------------
-# Calculate the TM-scores using a external tool "TMscore"
-#----------------------------------------------------------
-calculateTmscore <- function (targetProtein, referenceProtein) {
-	targetProtein    = listOfPDBPaths [[targetProtein]]
-	referenceProtein = listOfPDBPaths [[referenceProtein]]
-
-	allArgs = c (referenceProtein, targetProtein)
-	output  = system2 ("TMscore", args=allArgs, stdout=T)
-
-	lineTMscore = strsplit (output, "\n")[[17]]
-	tmscore = strsplit (lineTMscore, "[ ]{1,}")
-	return  (1-as.double (tmscore[[1]][[3]]))
 }
 
 #----------------------------------------------------------
@@ -124,6 +98,18 @@ writeClusteringResults <- function (clusteringResults, outputDir) {
 			system (cmm)
 		}
 }
+
+#--------------------------------------------------------------
+# Calculate pairwise using TM-score distance
+#--------------------------------------------------------------
+getTMDistanceMatrix <- function (inputBinDir, outputBinDir) {
+	system (paste ("TMscore-distance-matrix.py", inputBinDir, outputBinDir))
+	distanceFilename = paste (outputBinDir,"/", basename (inputBinDir), ".dist", sep="")
+	matrixTM = read.table (distanceFilename, header=T)
+	distanceMatrixTM =  as.dist (matrixTM)
+	return (distanceMatrixTM)
+}
+
 
 #----------------------------------------------------------
 # Create dir, if it exists the it is renamed old-XXX
@@ -145,6 +131,35 @@ createDir <- function (newDir) {
 	checkOldDir (newDir)
 	system (sprintf ("mkdir %s", newDir))
 }
+
+
+getDistMat <- function (inputBinDir, outputBinDir) {
+	n = length (listOfPDBPaths)
+	mat = matrix (seq (1,n))
+
+	distMat = proxy::dist (mat, method=calculateTmscore)
+	return (distMat)
+}
+	
+
+
+calculateTmscore <- function (targetProtein, referenceProtein) {
+	cat (">>>", targetProtein, "\n")
+	cat (">>>", referenceProtein,"\n")
+	targetProtein    = listOfPDBPaths [[targetProtein]]
+	referenceProtein = listOfPDBPaths [[referenceProtein]]
+	cat (">>>", targetProtein, "\n")
+	cat (">>>", referenceProtein,"\n")
+
+	allArgs = c (referenceProtein, targetProtein)
+	output  = system2 ("TMscore", args=allArgs, stdout=T)
+
+	lineTMscore = strsplit (output, "\n")[[17]]
+	tmscore = strsplit (lineTMscore, "[ ]{1,}")
+	return  (as.double (tmscore[[1]][[3]]))
+}
+
+
 
 #--------------------------------------------------------------
 #--------------------------------------------------------------

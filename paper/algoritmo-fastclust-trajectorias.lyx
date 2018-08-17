@@ -788,19 +788,21 @@ Algoritmo de Reducción de Trayectorias de Plegamiento
 \end_layout
 
 \begin_layout Standard
-El algoritmo realiza un agrupamiento local rápido que produce una reducción
- de la trayectoria original siguiendo la idea propuesta por Hobohm et al.
+La primera parte del algoritmo realiza un agrupamiento local rápido donde
+ se aprovecha el ordenamiento temporal de las conformaciones implícito en
+ la trayectoria.
+ Pare esto, se toma la idea del algoritmo propuesto por Hobohm et al.
  [1] para la selección de conjuntos de proteínas.
- El algoritmo inicia particionando la trayectoria en 
+ Se particiona la trayectoria en 
 \emph on
-bins
+M bins
 \emph default
  o secciones de 
 \emph on
 N 
 \emph default
-estructuras contiguas en tiempo de simulación.
- Después para cada uno de los 
+conformaciones contiguas en el tiempo de simulación.
+ Para cada uno de los 
 \emph on
 bins
 \emph default
@@ -813,33 +815,22 @@ bins
 \emph on
 bin 
 \emph default
-y esto mismo se realiza para el resto de 
-\emph on
-bins 
-\emph default
-resultantes del particionamiento.
- Nuestro algoritmo aprovecha el ordenamiento temporal de las estructuras
- implícito en las trayectorias, y es altamente paralelizable debido a su
- diseño de particionamiento en 
+y esto mismo se realiza para los demás 
 \emph on
 bins.
- 
-\end_layout
 
-\begin_layout Standard
-Adicional a la reducción anterior, el algoritmo realiza otra reducción aún
- mayor  utilizando los resultados del agrupamiento local.
- Con cada conjunto de estructuras cabeza de grupo seleccionada en cada 
+\emph default
+ En la segunda parte del algoritmo, toma cada conjunto de conformaciones
+ cabeza de grupo seleccionadas en cada 
 \emph on
 bin
 \emph default
- se crea una matriz de similaridades y se la usa para realizar un agrupamiento
- que selecciona las 
+ y se crea una matriz de similaridades que se la usa para realizar un agrupamien
+to para seleccionar las 
 \emph on
 K
 \emph default
- estructuras más representativas de cada conjunto, pero ahora la selección
- toma los
+ estructuras más representativas de cada conjunto tomando los
 \emph on
  k-medoides
 \emph default
@@ -853,13 +844,13 @@ K
 bin
 \emph default
  crea un nuevo conjunto mucho más reducido que el creado en el agrupamiento
- local, aunque menos detallado.
+ local.
  El orden temporal no se pierde ya que las 
 \emph on
 K
 \emph default
- estructuras seleccionada por cada conjunto se las ordena de acuerdo a su
- tiempo original de simulación.
+ estructuras seleccionadas por cada conjunto se las ordena de acuerdo a
+ su tiempo original de simulación.
 \end_layout
 
 \begin_layout Standard
