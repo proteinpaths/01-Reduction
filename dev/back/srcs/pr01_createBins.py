@@ -1,8 +1,9 @@
 #!/usr/bin/python
 
 USAGE="\
-Extracts from ini to end PDBs files from a directory \
-USAGE: extract-pdbs.py <inputDir> <outputDir> <ini> <end>\n"
+Split the files of an input directory in bins according to the\n\
+size of the bin. The bins are put in an output directory\n\
+USAGE: createBins.py <inputDir> <outputDir> <sizeBin>\n"
 
 import os, sys, math
 #SIZEBIN  = 100   # Number of files for each bin
@@ -17,12 +18,11 @@ def main (args):
 
 	inputDir  = "%s/%s" % (os.getcwd (), args [1])
 	outputDir = "%s/%s" % (os.getcwd (), args [2])
-	ini   = int (args [3]) 
-	end   = int (args [4]) 
+	SIZEBIN   = int (args [3]) 
 
 	createDir (outputDir)
 
-	copyFiles (inputDir, outputDir, ini, end)
+	createBins (inputDir, outputDir, SIZEBIN)
 
 #--------------------------------------------------------
 # Creates bins from files in an input dir 
@@ -30,15 +30,41 @@ def main (args):
 # binSize is the number of file by bin
 # sizeFill is the prefix for each bin filename
 #--------------------------------------------------------
-def copyFiles (inputDir, outputDir, ini, end):
+def createBins (inputDir, outputDir, binSize):
 	inputFiles  = getSortedFilesDir (inputDir, ".pdb")
 	n = len (inputFiles)
-	subList = inputFiles [ini-1:end]
+	sizeFill = len (str(n))
+	binList = splitBins (inputFiles, binSize)
 
-	for filename in subList:
-		sourceFilename  = "%s/%s" % (inputDir, filename)
-		destinyFilename = "%s/%s" % (outputDir, filename)
-		os.symlink (sourceFilename, destinyFilename)
+	for k,lst in enumerate (binList):
+		binNumber = k+1
+		print ">>> Creating bin %s..." % binNumber
+		binDirname = "%s/%s%s" % (outputDir, "bin", str (binNumber).zfill (sizeFill))
+		os.mkdir (binDirname)
+		for filename in lst:
+			sourceFilename  = "%s/%s" % (inputDir, filename)
+			destinyFilename = "%s/%s" % (binDirname, filename)
+			os.symlink (sourceFilename, destinyFilename)
+
+#--------------------------------------------------------
+# Creates a list of sublist where each sublist corresponds to
+# the files of each bin
+#--------------------------------------------------------
+def splitBins (inputFiles, binSize):
+	nSeqs = len (inputFiles)
+	#nBins = nSeqs / binSize
+	nBins = int (math.ceil (1.0*nSeqs / binSize))
+
+	binList = []
+	for k in range (nBins):
+		start = k*binSize
+		end   = start + binSize 
+		if k < nBins-1:
+			binList.append (inputFiles [start:end])
+		else:
+			binList.append (inputFiles [start:])
+
+	return binList
 
 #------------------------------------------------------------------
 # Utility to create a directory safely.

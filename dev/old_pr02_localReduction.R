@@ -49,21 +49,7 @@ main <- function () {
 	clusteringResults  = mclapply (binPathLst, reduceLocal, 
 								   outputDir=dirBins, 
 								   threshold=THRESHOLD, mc.cores=NCORES)
-	#writeClusteringResults (clusteringResults, dirPdbs)
-}
-
-#----------------------------------------------------------
-# Make links of the selected PDBs into the output dir
-#----------------------------------------------------------
-writeClusteringResults <- function (clusteringResults, outputDir) {
-	cat ("\nWriting results local reducing...\n")
-	for (binResults in clusteringResults) 
-		for (pdbPath in binResults) {
-			cmm <- sprintf ("ln -s %s/%s %s/%s", getwd(),
-									 pdbPath, outputDir, basename (pdbPath))
-			#cat (paste (">>> ", cmm, "\n"))
-			system (cmm)
-		}
+	writeClusteringResults (clusteringResults, dirPdbs)
 }
 
 
@@ -80,25 +66,8 @@ reduceLocal <- function (inputBinPath, outputDir, threshold) {
 
 	# Fast clustering for bin, writes representatives to outputBinPath
 	listOfSelectedPdbs = fastClustering (inputBinPath, outputBinPath, threshold, inputProteinsLst)
-
-	writeResults (inputBinPath, dirPdbs)
-
 	return (listOfSelectedPdbs)
 }
-
-#----------------------------------------------------------
-# Make links of the selected PDBs into the output dir
-#----------------------------------------------------------
-writeResults <- function (inputBinPath, outputDir) {
-	cat ("\nWriting results local reducing...\n")
-	for (pdbPath in inputBinPath) {
-		cmm <- sprintf ("ln -s %s/%s %s/%s", getwd(),
-								 pdbPath, outputDir, basename (pdbPath))
-		#cat (paste (">>> ", cmm, "\n"))
-		system (cmm)
-	}
-}
-#
 
 #----------------------------------------------------------
 # Fast clustering following hobbohm algorith
@@ -129,6 +98,20 @@ fastClustering <- function (inputBinPath, outputBinPath, threshold, inputProtein
 	}
 	return (listOfSelectedPdbs)
 }	
+
+#----------------------------------------------------------
+# Make links of the selected PDBs into the output dir
+#----------------------------------------------------------
+writeClusteringResults <- function (clusteringResults, outputDir) {
+	cat ("\nWriting results local reducing...\n")
+	for (binResults in clusteringResults) 
+		for (pdbPath in binResults) {
+			cmm <- sprintf ("ln -s %s/%s %s/%s", getwd(),
+									 pdbPath, outputDir, basename (pdbPath))
+			#cat (paste (">>> ", cmm, "\n"))
+			system (cmm)
+		}
+}
 
 #----------------------------------------------------------
 # Calculate the TM-scores using a external tool
