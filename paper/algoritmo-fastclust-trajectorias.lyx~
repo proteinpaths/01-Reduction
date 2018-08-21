@@ -87,39 +87,6 @@ Algoritmo Rápido de Clustering para Trajectorias de Plegamiento de Proteínas
 Introducción
 \end_layout
 
-\begin_layout Standard
-\begin_inset Graphics
-	filename /home/ppath/01-Reduction/dev/res/1FCA1-40b05t02k/1FCA1.pdf
-	lyxscale 30
-	scale 35
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename /home/ppath/01-Reduction/dev/res/1FCA1-40b05t02k/pdbsLocal.pdf
-	lyxscale 30
-	scale 35
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Graphics
-	filename /home/ppath/01-Reduction/dev/res/1FCA1-40b05t02k/pdbsGlobal.pdf
-	lyxscale 30
-	scale 35
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Description
 Contexto: Actualmente se están liberando con más frecuencia datos de simulacione
 s de plegamiento de proteínas para que la comunidad científica los analice
@@ -321,7 +288,7 @@ TM-score
 
 \begin_layout Standard
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Description
 [https://zhanglab.ccmb.med.umich.edu/TM-score/]: TM-score is a metric for measuring
@@ -336,6 +303,106 @@ status collapsed
  corresponds to randomly chosen unrelated proteins whereas with a score
  higher than 0.5 assume generally the same fold in SCOP/CATH.
  
+\end_layout
+
+\begin_layout Description
+[https://en.wikipedia.org/wiki/Template_modeling_score] bioinformatics, the
+ template modeling score or TM-score is a measure of similarity between
+ two protein structures with different tertiary structures.
+ The TM-score is intended as a more accurate measure of the quality of full-leng
+th protein structures than the often used RMSD and GDT measures.
+ The TM-score indicates the difference between two structures by a score
+ between ( 0 , 1 ] {
+\backslash
+displaystyle (0,1]} {
+\backslash
+displaystyle (0,1]}, where 1 indicates a perfect match between two structures
+ (thus the higher the better).[1] Generally scores below 0.20 corresponds
+ to randomly chosen unrelated proteins whereas structures with a score higher
+ than 0.5 assume roughly the same fold.[2] A quantitative study [3] shows
+ that proteins of TM-score = 0.5 have a posterior probability of 37% in the
+ same CATH topology family and of 13% in the same SCOP fold family.
+ The probabilities increase rapidly when TM-score > 0.5.
+ The TM-score is designed to be independent of protein lengths.
+ Contents
+\end_layout
+
+\begin_layout Description
+[Scoring
+\begin_inset space ~
+\end_inset
+
+function
+\begin_inset space ~
+\end_inset
+
+for
+\begin_inset space ~
+\end_inset
+
+automated
+\begin_inset space ~
+\end_inset
+
+assessment
+\begin_inset space ~
+\end_inset
+
+of
+\begin_inset space ~
+\end_inset
+
+protein
+\begin_inset space ~
+\end_inset
+
+structure
+\begin_inset space ~
+\end_inset
+
+template
+\begin_inset space ~
+\end_inset
+
+quality
+\begin_inset space ~
+\end_inset
+
+Zhang
+\begin_inset space ~
+\end_inset
+
+Y.
+\begin_inset space ~
+\end_inset
+
+Skolnick
+\begin_inset space ~
+\end_inset
+
+J.] We have developed a new scoring function, the template modeling score
+ (TM-score), to assess the quality of protein structure templates and predicted
+ full-length models by extending the approaches used in Global Distance
+ Test (GDT) and MaxSub.
+ First, a protein size-dependent scale is exploited to eliminate the inherent
+ protein size dependence of the previous scores and appropriately account
+ for random protein structure pairs.
+ Second, rather than setting specific distance cutoffs and calculating only
+ the fractions with errors below the cutoff, all residue pairs in alignment/mode
+ling are evaluated in the proposed score.
+ For comparison of various scoring functions, we have constructed a large-scale
+ benchmark set of structure templates for 1489 small to medium size proteins
+ using the threading program PROSPECTOR_3 and built the full-length models
+ using MODELLER and TASSER.
+ The TM-score of the initial threading alignments, compared to the GDT and
+ MaxSub scoring functions, shows a much stronger correlation to the quality
+ of the final full-length models.
+ The TM-score is further exploited as an assessment of all 'new fold' targets
+ in the recent CASP5 experiment and shows a close coincidence with the results
+ of human-expert visual assessment.
+ These data suggest that the TM-score is a useful complement to the fully
+ automated assessment of protein structure predictions.
+ © 2004 Wiley-Liss, Inc.
 \end_layout
 
 \end_inset
@@ -788,22 +855,21 @@ Algoritmo de Reducción de Trayectorias de Plegamiento
 \end_layout
 
 \begin_layout Standard
-La primera parte del algoritmos inicia con un agrupamiento local rápido
- donde se aprovecha el ordenamiento temporal de las conformaciones implícito
- en la trayectoria.
- La idea de este primer agrupamiento se basa en el algoritmo propuesto por
- Hobohm et al.
+La primera parte del algoritmo realiza un agrupamiento local rápido donde
+ se aprovecha el ordenamiento temporal de las conformaciones implícito en
+ la trayectoria.
+ Pare esto, se toma la idea del algoritmo propuesto por Hobohm et al.
  [1] para la selección de conjuntos de proteínas.
- Se inicia particionando la trayectoria en 
+ Se particiona la trayectoria en 
 \emph on
-bins
+M bins
 \emph default
  o secciones de 
 \emph on
 N 
 \emph default
-estructuras contiguas en el tiempo de simulación.
- Después para cada uno de los 
+conformaciones contiguas en el tiempo de simulación.
+ Para cada uno de los 
 \emph on
 bins
 \emph default
@@ -816,28 +882,22 @@ bins
 \emph on
 bin 
 \emph default
-y esto mismo se realiza para el resto de 
+y esto mismo se realiza para los demás 
 \emph on
-bins 
-\emph default
-resultantes del particionamiento.
- 
-\end_layout
+bins.
 
-\begin_layout Standard
-Adicional a la reducción anterior, el algoritmo realiza otra reducción aún
- mayor  utilizando los resultados del agrupamiento local.
- Con cada conjunto de estructuras cabeza de grupo seleccionada en cada 
+\emph default
+ En la segunda parte del algoritmo, toma cada conjunto de conformaciones
+ cabeza de grupo seleccionadas en cada 
 \emph on
 bin
 \emph default
- se crea una matriz de similaridades y se la usa para realizar un agrupamiento
- que selecciona las 
+ y se crea una matriz de similaridades que se la usa para realizar un agrupamien
+to para seleccionar las 
 \emph on
 K
 \emph default
- estructuras más representativas de cada conjunto, pero ahora la selección
- toma los
+ estructuras más representativas de cada conjunto tomando los
 \emph on
  k-medoides
 \emph default
@@ -851,21 +911,13 @@ K
 bin
 \emph default
  crea un nuevo conjunto mucho más reducido que el creado en el agrupamiento
- local, aunque menos detallado.
+ local.
  El orden temporal no se pierde ya que las 
 \emph on
 K
 \emph default
- estructuras seleccionada por cada conjunto se las ordena de acuerdo a su
- tiempo original de simulación.
-\end_layout
-
-\begin_layout Standard
-, y es altamente paralelizable debido a su diseño de particionamiento en
- 
-\emph on
-bins.
- 
+ estructuras seleccionadas por cada conjunto se las ordena de acuerdo a
+ su tiempo original de simulación.
 \end_layout
 
 \begin_layout Standard
@@ -1068,17 +1120,6 @@ bins,
 \end_layout
 
 \begin_layout Section
-Resultados
-\end_layout
-
-\begin_layout Standard
-A continuación presentamos los resultados de la reducción a algunas trayectorias
- de simulación de plegamiento de proteínas de dos fuentes distintas que
- usan distintos métodos de simulación.
- La primera corresponde a las simulaciones creadas por el grupo de 
-\end_layout
-
-\begin_layout Section
 Detalles de Implementación
 \end_layout
 
@@ -1103,7 +1144,7 @@ separation "3pt"
 shadowsize "4pt"
 framecolor "black"
 backgroundcolor "none"
-status open
+status collapsed
 
 \begin_layout Plain Layout
 El algoritmo está implementado a través de tres scripts: 
@@ -1279,22 +1320,426 @@ parallel
 \end_layout
 
 \begin_layout Section
-Resultados y Discusión
+Resultados
 \end_layout
 
 \begin_layout Standard
-Utilizando los datos de la trayectoria descrita en la sección 2, aquí mostramos
- como estas escala escala al realizar agrupamientos de bloques de 1000,
- es decir de picosegundos a nanosegundo y después a milisegundos.
- A continuación mostramos los agrupamientos utilizando diferentes métodos
- para de tres bloques de 1000 conformaciones de la trayectoria: el primer
- bloque corresponde a las primeras 1000 conformaciones; el segundo bloque
- corresponde a las 1000 conformaciones de la mitad; y el tercer bloque correspon
-de a las 1000 ultimas conformaciones.
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+Presentamos los resultados de la reducción realizada a tres trayectorias
+ de proteínas.
+ Las dos primeras son trayectorias relativamente cortas de menos de 300
+ conformaciones, mientras que la tercera es mucho mas larga con más de 1
+ millón de conformaciones.
+ En la Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:dos-trayectorias"
+
+\end_inset
+
+ se presenta las reducciones de las dos trayectorias cortas que corresponden
+ a las proteínas 1FCA1 y 2YCC.
+ En la parte superior está la gráfica de la trayectoria completa; en la
+ mitad la trayectoria después de la reducción local; y en la parte superior
+ está la trayectoria final después de la reducción global.
+ Se observa que la reducción final en la trayectoria de la proteína 1FCA1
+ es alrededor del 4 veces (de 239 a 57 conformaciones, con 40 bins, un tmscore
+ de 0.5 y un k de 10); mientras que en la trayectoria de la proteína 2YCC
+ es alrededor de 10 veces (de 268 a 26 conformaciones, con 50 bins, un tmscore
+ de 0.5 y un k de 5).
+ Así mismo, se observa que los eventos más representativos de las dos trayectori
+as se conservan en las reducciones (recuadros en rojo).
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+A.
+ 1FCA1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+B.
+ 2YCC
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/1FCA1-40b05t10k-pdbs-ann.pdf
+	lyxscale 30
+	scale 20
+	BoundingBox 0bp 45bp 1008bp 445bp
+	clip
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/1FCA1-40b05t10k-pdbsLocal.pdf
+	lyxscale 30
+	scale 20
+	BoundingBox 0bp 45bp 1008bp 465bp
+	clip
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/1FCA1-40b05t10k-pdbsGlobal-ann.pdf
+	lyxscale 30
+	scale 20
+	BoundingBox 0bp 10bp 1008bp 465bp
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "40col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/2YCC-50b05t05k-pdbs-ann.pdf
+	lyxscale 30
+	scale 20
+	BoundingBox 0bp 45bp 1008bp 445bp
+	clip
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/2YCC-50b05t05k-pdbsLocal.pdf
+	lyxscale 30
+	scale 20
+	BoundingBox 0bp 45bp 1008bp 465bp
+	clip
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/2YCC-50b05t05k-pdbsGlobal-ann.pdf
+	lyxscale 30
+	scale 20
+	BoundingBox 0bp 10bp 1008bp 465bp
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Reducción de dos trayectorias cortas de plegamiento.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:dos-trayectorias"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+En la Figura 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:tray-2JOF-full"
+
+\end_inset
+
+ se observa la reducción hecha sobre la trayectoria de la proteína 2FOF
+ que contiene más de 1 millón de conformaciones.
+ La reducción final fué de más de 100 veces (de 1044004 a 10443 conformaciones).
+ Al igual que en las anteriores, la trayectoria total se muestra en la parte
+ superior, la reducción local en el medio, y la reducción global final en
+ la parte inferior.
+ A pesar de que en la simulación se presentan bastante oscilaciones, en
+ general se observa que los eventos principales se conservan en la reducción.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="1" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "80col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/2JOF-FULL-100b05t01k-pdbs-small.pdf
+	lyxscale 30
+	scale 25
+	BoundingBox 0bp 10bp 1440bp 465bp
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/2JOF-FULL-100b05t01k-pdbsLocal-small.pdf
+	lyxscale 30
+	scale 25
+	BoundingBox 0bp 45bp 1440bp 465bp
+	clip
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename img/2JOF-FULL-100b05t01k-pdbsGlobal.pdf
+	lyxscale 30
+	scale 25
+	BoundingBox 0bp 10bp 1440bp 465bp
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Reducción de una trayectoria larga de plegamiento.
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:tray-2JOF-full"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Discusión
 \end_layout
 
 \begin_layout Subsection
-Escalamiento de la trayectoría
+Escalamiento de la trayectoria
 \end_layout
 
 \begin_layout Subsection

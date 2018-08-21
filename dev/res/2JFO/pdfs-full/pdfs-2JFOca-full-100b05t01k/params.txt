@@ -1,0 +1,13 @@
+Protein name: 2JOFca
+Size of bins : 100
+TM-score trhreshold : 0.5
+K representatives : 1
+
+N PDBs : 1044004
+N Local PDBs: 920138
+N Global PDBs: 10443
+
+Start time: 16:18
+End time :19:48
+-----
+Total time :03:30

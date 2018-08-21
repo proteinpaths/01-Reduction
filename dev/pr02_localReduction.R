@@ -48,7 +48,7 @@ main <- function () {
 	binPathLst         = list.files (INPUTDIR, pattern="bin", full.names=T)
 	clusteringResults  = mclapply (binPathLst, reduceLocal, 
 								   outputDir=dirBins, 
-								   threshold=THRESHOLD, mc.cores=NCORES)
+								   threshold=THRESHOLD,dirPdbs=dirPdbs, mc.cores=NCORES)
 	#writeClusteringResults (clusteringResults, dirPdbs)
 }
 
@@ -66,11 +66,10 @@ writeClusteringResults <- function (clusteringResults, outputDir) {
 		}
 }
 
-
 #----------------------------------------------------------
 # Reduction function to reduce a single bin
 #----------------------------------------------------------
-reduceLocal <- function (inputBinPath, outputDir, threshold) {
+reduceLocal <- function (inputBinPath, outputDir, threshold, dirPdbs) {
 	cat ("\n>>> Local Reducing ", inputBinPath )
 	# Create the output dir for representatives
 	outputBinPath = (paste (getwd(), outputDir, basename (inputBinPath), sep="/"))
@@ -81,7 +80,7 @@ reduceLocal <- function (inputBinPath, outputDir, threshold) {
 	# Fast clustering for bin, writes representatives to outputBinPath
 	listOfSelectedPdbs = fastClustering (inputBinPath, outputBinPath, threshold, inputProteinsLst)
 
-	writeResults (inputBinPath, dirPdbs)
+	writeResults (listOfSelectedPdbs, inputBinPath, dirPdbs)
 
 	return (listOfSelectedPdbs)
 }
@@ -89,9 +88,9 @@ reduceLocal <- function (inputBinPath, outputDir, threshold) {
 #----------------------------------------------------------
 # Make links of the selected PDBs into the output dir
 #----------------------------------------------------------
-writeResults <- function (inputBinPath, outputDir) {
-	cat ("\nWriting results local reducing...\n")
-	for (pdbPath in inputBinPath) {
+writeResults <- function (listOfSelectedPdbs, inputBinPath, outputDir) {
+	cat ("\n>>> Writing results local reducing ", inputBinPath,"...\n")
+	for (pdbPath in listOfSelectedPdbs) {
 		cmm <- sprintf ("ln -s %s/%s %s/%s", getwd(),
 								 pdbPath, outputDir, basename (pdbPath))
 		#cat (paste (">>> ", cmm, "\n"))

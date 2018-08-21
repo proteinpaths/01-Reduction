@@ -68,7 +68,7 @@ calculateTmscore <- function (targetProtein, referenceProtein) {
 #-------------------------------------------------------------
 plotPathway <- function (rmsdValues, outputFile) {
 	#pdf (outputFile, width=20)
-	pdf (outputFile, width=20)
+	pdf (outputFile, width=14)
 		n = length(rmsdValues)
 		rd = rmsdValues[1:n]
 		time = 0:(n-1)

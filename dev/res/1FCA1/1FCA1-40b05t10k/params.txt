@@ -1,0 +1,7 @@
+Protein name: 
+Size of bins : 40
+TM-score trhreshold : 0.5
+K representatives : 10
+N pdbs       = 239
+N pdbsLocal  = 70
+N pdbsGlobal = 57

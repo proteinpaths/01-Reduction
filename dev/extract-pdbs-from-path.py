@@ -38,7 +38,8 @@ def copyFiles (inputDir, outputDir, ini, end):
 	for filename in subList:
 		sourceFilename  = "%s/%s" % (inputDir, filename)
 		destinyFilename = "%s/%s" % (outputDir, filename)
-		os.symlink (sourceFilename, destinyFilename)
+		#os.symlink (sourceFilename, destinyFilename)
+		os.system ("cp %s %s" % (sourceFilename, destinyFilename))
 
 #------------------------------------------------------------------
 # Utility to create a directory safely.

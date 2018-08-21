@@ -1,0 +1,8 @@
+Protein name: 2YCC
+Size of bins : 50
+TM-score trhreshold : 0.5
+K representatives : 5
+
+Num of pdbs = 268
+Num of pdbsLocal = 75
+Num of pdbsGlobal = 26
