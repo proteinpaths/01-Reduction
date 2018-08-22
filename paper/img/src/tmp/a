@@ -1,0 +1,3 @@
+convert -density 200x200 -quality 80 -compress jpeg 2JOF-FULL-100b05t01k-pdbs.pdf 2JOF-FULL-100b05t01k-pdbs-small.pdf &
+convert -density 200x200 -quality 80 -compress jpeg 2JOF-FULL-100b05t01k-pdbsGlobal.pdf 2JOF-FULL-100b05t01k-pdbsGlobal-small.pdf &
+convert -density 200x200 -quality 80 -compress jpeg 2JOF-FULL-100b05t01k-pdbsLocal.pdf 2JOF-FULL-100b05t01k-pdbsLocal-small.pdf &
