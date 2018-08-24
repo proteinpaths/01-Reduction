@@ -290,25 +290,6 @@ Métodos de Comparación de Estructuras de Proteínas (MMart)
 \end_layout
 
 \begin_layout Standard
-Revisar [
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Kufareva2015"
-literal "true"
-
-\end_inset
-
-].
- La idea es definir que es RMSD, GDS, TM-score con las referencias.
- Después empieza uno contras de RMSD (sensible), GDS (umbrales), y unos
- pros sobre TM-score (no tiene umbrales, idenpendiente del nro de aminos).
-\end_layout
-
-\begin_layout Standard
-........
-\end_layout
-
-\begin_layout Standard
 Cuantificar la diferencia entre dos estrucutras de una misma proteína puede
  parecer simple pero no es un problema trivial, y las distintas aproximaciones
  para abordarlo están en contínua evolución.
@@ -330,7 +311,15 @@ ciegas
  evaluar estos modelos simulados, ahora su aplicación se extiende además
  a la identificación, evaluación, entendimiento y predicción de cambios
  conformacionales en proteínas, siendo esto un punto clave en su funcionamiento
- biológico.
+ biológico
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kufareva2015"
+literal "true"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -356,28 +345,45 @@ ión de las estrucutras no puede ser realizada de la manera más efectiva
  por el algoritmo que optimiza el RMSD global.
 \end_layout
 
+\begin_layout Subsubsection
+GDT
+\end_layout
+
 \begin_layout Standard
-.........
+También conocido como GDT TS (por total score).
+ Sirve para medir la similitud entre dos estructuras de proteínas con una
+ secuencias de aminoácidos idénticas pero una estructura terciaria distinta.
+ Es una métrica pensada para ser una medida más precisa que RMSD, la cual,
+ como se mencionó, es muy sensible a las regiones atípicas de modelados
+ pobres aun cuando el resto de la estructura sea razonablemente similar.
+ En general, cuanto más alto es el valor de GDT_TS, mejor es un modelo determina
+do comparado con una estructura de referencia.
+ El valor GDT se calcula como el conjunto más largo de átomos carbonos alfa
+ en la estructura modelo que se encuentran a una determinada distancia de
+ la proteína referencia.
+ Dicha distancia está determinada por un umbral específico.
+ En general el GDT score se calcula usando varios umbrales, y típicamente
+ un aumento en el umbral implica un aumento en el score.
+ Si esto no es así, es posible que sea un indicador de que la divergencia
+ entre la estructura referencia y el modelo es muy alta.
+ 
 \end_layout
 
 \begin_layout Subsubsection
-GDS
+TM-score
 \end_layout
 
 \begin_layout Standard
-+ Aca hablamos de las generalidades de los metodos de comparacion
-\end_layout
-
-\begin_layout Standard
-+ Luego hablamos de RMSD
-\end_layout
-
-\begin_layout Standard
-+ Luego hablamos de GDS
-\end_layout
-
-\begin_layout Standard
-+ Luego de TM_SCore
+TM-score (Template modeling score) es otra medida de similitud entre dos
+ proteínas que tienen distintas estructuras terciarias.
+ Fue concebida como una medida más precisa que RMSD y GDT.
+ TM-score representa la diferencia entre dos estructuras con un puntaje
+ que va de 0 a 1, donde 1 indica un emparejamiento perfecto de ambas proteínas.
+ Un puntaje de menos de 0.20 indica una comparación entre dos proteínas aleatoria
+s no relacionadas entre sí.
+ Esta métrica está diseñada para ser independiente de la longitud de las
+ proteínas que se están comparando.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -669,7 +675,76 @@ Algoritmos de Agrupamiento Clásicos (MMart)
 \end_layout
 
 \begin_layout Standard
-Hablar de k-means y k-medoides.
+Intro?
+\end_layout
+
+\begin_layout Subsubsection
+K-Means
+\end_layout
+
+\begin_layout Standard
+K-Means es un algoritmo bien conocido para clustering.
+ Este algoritmo agrupa los datos basado en su cercanía de acuerdo a la distancia
+ euclidiana.
+ Toma K
+\begin_inset script subscript
+
+\begin_layout Plain Layout
+y
+\end_layout
+
+\end_inset
+
+ como parámetro de entrada y particiona un conjunto de n objetos en K
+\begin_inset script subscript
+
+\begin_layout Plain Layout
+y
+\end_layout
+
+\end_inset
+
+clusters
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Arora2016"
+literal "false"
+
+\end_inset
+
+.
+ El método tiene algunos puntos débiles, por ejemplo, encontrar el valor
+ de K puede ser difícil y los resultados finales varían debido a las inicializac
+iones aleatorias de las particiones.
+ Otro aspecto importante es que el algoritmo K-means es sensible a datos
+ atípicos, puesto que una media es influenciada fácilmente por valores extremos.
+\end_layout
+
+\begin_layout Subsubsection
+K-Medoides
+\end_layout
+
+\begin_layout Standard
+El algoritmo K-Medoides es también un algoritmo de particionamiento y por
+ tanto intenta minimizar la distancia entre puntos designados para estar
+ en un mismo cluster y un punto designado como el centro del mismo.
+\end_layout
+
+\begin_layout Standard
+K-Medoides es una variante de K-means la cual es más robusta a ruidos y
+ datos atípicos.
+ En lugar de usar el punto de la media como centro del cluster, K-Medoides
+ usa un punto deal en el cluster para representarlo.
+ Un Medoide es el objeto localizado más centralmente en el cluster, con
+ una suma mínima de distancia a otros puntos
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jin2010"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection

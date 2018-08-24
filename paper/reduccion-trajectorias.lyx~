@@ -1,5 +1,5 @@
-#LyX 2.2 created this file. For more info see http://www.lyx.org/
-\lyxformat 508
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -25,6 +25,8 @@
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures false
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -54,6 +56,7 @@
 \suppress_date false
 \justification true
 \use_refstyle 1
+\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -66,7 +69,10 @@
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language french
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style swiss
+\dynamic_quotes 0
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -288,6 +294,7 @@ Revisar [
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Kufareva2015"
+literal "true"
 
 \end_inset
 
@@ -295,6 +302,97 @@ key "Kufareva2015"
  La idea es definir que es RMSD, GDS, TM-score con las referencias.
  Después empieza uno contras de RMSD (sensible), GDS (umbrales), y unos
  pros sobre TM-score (no tiene umbrales, idenpendiente del nro de aminos).
+\end_layout
+
+\begin_layout Standard
+........
+\end_layout
+
+\begin_layout Standard
+Cuantificar la diferencia entre dos estrucutras de una misma proteína puede
+ parecer simple pero no es un problema trivial, y las distintas aproximaciones
+ para abordarlo están en contínua evolución.
+ En 1994 se originó CASP (Critical Assessment of techniques for protein
+ Structure Prediction) como un experimiento de comunidad científica, el
+ cual brinda la posibilidad de evaluar métodos en predicciones 
+\begin_inset Quotes cld
+\end_inset
+
+ciegas
+\begin_inset Quotes crd
+\end_inset
+
+ de proteínas recientemente resueltas pero sin publicar.
+ Con esto se puede decir que los métodos de comparación de estructuras han
+ estado en desarrollo activo y se han usado en el campo de la modelación
+ computacional específicamente para medir la calidad de los modelos predichos.
+ Sin embargo, aunque estos modelos fueron originalmente desarollados para
+ evaluar estos modelos simulados, ahora su aplicación se extiende además
+ a la identificación, evaluación, entendimiento y predicción de cambios
+ conformacionales en proteínas, siendo esto un punto clave en su funcionamiento
+ biológico.
+\end_layout
+
+\begin_layout Standard
+Dentro de los métodos más conocidos se puede citar el RMSD global, el GDS
+ y el TM-score.
+ A continuación se presenta una descripción general de cada uno de ellos,
+ así como los casos en los que unos resultan más adecuados que los demás.
+\end_layout
+
+\begin_layout Subsubsection
+RMSD
+\end_layout
+
+\begin_layout Standard
+La medida RMSD (Root Mean Square Deviation) es la medida cuantitativa de
+ similitud entre dos coordenadas atomicas superpuestas más usada comunmente.
+ Esta medida puede ser calculada para cualquier tipo y subset de atomos.
+ Un uso común es calcualr el RMSD sobre los carbonos alfa (Cα), lo que reduce
+ la cantidad de cálculos a realizar.
+ Una de las desventajas de RMSD radica en que es muy sensible a los errores.
+ Incluso si dos estructuras son casi identicas excepto un tramo, la superimposic
+ión de las estrucutras no puede ser realizada de la manera más efectiva
+ por el algoritmo que optimiza el RMSD global.
+\end_layout
+
+\begin_layout Standard
+.........
+\end_layout
+
+\begin_layout Subsubsection
+GDT
+\end_layout
+
+\begin_layout Standard
+GDT es un método que suple las principales falencias de RMSD relacionadas
+ con su gran dependencia de éxito de la superposición de las estructuras.
+ GDT (Global Distance Test) utiliza múltiples superposiciones, cada una
+ de ellas incluyendo el subset más largo que se puede superponer para uno
+ de los residuos.
+ Esto significa que al comparar dos estructuras se toma cada residuo se
+ busca el subset 
+\end_layout
+
+\begin_layout Standard
+Siendo la gran dependencia el el éxito de la superposición uno de los puntos
+ débiles de RMSD, GDT aparece como un método que
+\end_layout
+
+\begin_layout Standard
++ Aca hablamos de las generalidades de los metodos de comparacion
+\end_layout
+
+\begin_layout Standard
++ Luego hablamos de RMSD
+\end_layout
+
+\begin_layout Standard
++ Luego hablamos de GDS
+\end_layout
+
+\begin_layout Standard
++ Luego de TM_SCore
 \end_layout
 
 \begin_layout Standard
@@ -310,6 +408,7 @@ TMscore:
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Zhan2004"
+literal "true"
 
 \end_inset
 
@@ -445,6 +544,7 @@ Revisar sección 2.2  Tesis LG
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Garreta2015"
+literal "true"
 
 \end_inset
 
@@ -482,6 +582,7 @@ Revisar secciones 2.7, especialmente la 2.7.1.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Garreta2015"
+literal "true"
 
 \end_inset
 
@@ -489,7 +590,7 @@ key "Garreta2015"
 \end_layout
 
 \begin_layout Subsection
-Simulaciones Largas de Plegamiento
+Simulaciones Largas de Plegamiento (MMart)
 \end_layout
 
 \begin_layout Standard
@@ -525,6 +626,7 @@ nes más largas y de proteínas más grandes.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "LougherMarsder12"
+literal "true"
 
 \end_inset
 
@@ -537,6 +639,7 @@ s
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Shaw08"
+literal "true"
 
 \end_inset
 
@@ -556,6 +659,7 @@ Otras fuentes
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Wikipedia1963"
+literal "true"
 
 \end_inset
 
@@ -563,6 +667,7 @@ key "Wikipedia1963"
 \begin_inset CommandInset citation
 LatexCommand cite
 key "LougherMarsder12"
+literal "true"
 
 \end_inset
 
@@ -572,6 +677,14 @@ key "LougherMarsder12"
 \end_inset
 
  
+\end_layout
+
+\begin_layout Subsection
+Algoritmos de Agrupamiento Clásicos (MMart)
+\end_layout
+
+\begin_layout Standard
+Hablar de k-means y k-medoides.
 \end_layout
 
 \begin_layout Subsection
@@ -593,6 +706,7 @@ n
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Shaw08"
+literal "true"
 
 \end_inset
 
@@ -600,6 +714,7 @@ key "Shaw08"
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Shaw08"
+literal "true"
 
 \end_inset
 
@@ -838,7 +953,7 @@ s.ucr .edu/home/seed.
 \end_layout
 
 \begin_layout Section
-Datos y Métodos
+Datos y Métodos (LuisG)
 \end_layout
 
 \begin_layout Standard
@@ -886,7 +1001,7 @@ cite {Shaw2010}
 \end_layout
 
 \begin_layout Section
-Algoritmo de Reducción de Trayectorias de Plegamiento
+Algoritmo de Reducción de Trayectorias de Plegamiento (LuisG)
 \end_layout
 
 \begin_layout Standard
@@ -1179,7 +1294,7 @@ bins,
 \end_layout
 
 \begin_layout Section
-Detalles de Implementación
+Detalles de Implementación (LuisG)
 \end_layout
 
 \begin_layout Subsection
