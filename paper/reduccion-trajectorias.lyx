@@ -542,6 +542,36 @@ literal "true"
 .
 \end_layout
 
+\begin_layout Standard
+El estado nativo de una proteína se catracteriza por una cadena de aminoácidos
+ organizados en una estructura 3D estable y plegada.
+ Los enlaces de hidrógeno estabilizan la estructura; el core interno está
+ mayormente firmado por resíduos hidrofóbicos, mantenidos juntos por fuerzas
+ van der Waals, mientras que su superficie está formada principalmente por
+ cadenas laterales polares y cargadas.
+ La estructura tiene una muy baja entropía por el empaquetado de los residuos,
+ así como las cadenas laterales fijas que reducen la flexibilidad de la
+ proteína.
+ Para lograr el estado nativo, la proteína se pliega de una cadena no estructura
+da, (no plegada) con alta energía libre, a un estado estable final, co baja
+ o mínima energía libre.
+ Durante este proceso, llamado proceso de plegamiento, la proteína experimenta
+ interacciones sucesivas entre los atomos de sus resíduos (y también los
+ atomos del solvente envolvente) hasta alcanzar un estado estable que determina
+ en gran medida su función biológica.
+ Estas interacciones o fuerzas pueden ser de distintas formas: interacciones
+ cortas entre residuos cercanos, e interacciones largas involucrando partes
+ de la proteína que son muy distantes en la secuencia.
+\end_layout
+
+\begin_layout Standard
+...
+\end_layout
+
+\begin_layout Standard
+WIP
+\end_layout
+
 \begin_layout Subsection
 Simulaciones de Plegamiento
 \end_layout
