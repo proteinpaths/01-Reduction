@@ -564,16 +564,46 @@ da, (no plegada) con alta energía libre, a un estado estable final, co baja
  de la proteína que son muy distantes en la secuencia.
 \end_layout
 
-\begin_layout Standard
-...
+\begin_layout Subsubsection
+El problema de plegamiento de proteínas
 \end_layout
 
 \begin_layout Standard
-WIP
+El problema de plegamiento de proteínas se enfoca en la manera en cómo una
+ proteína se pliega desde su secuencia de aminoácidos hasta una estructura
+ estable en 3D.
+ Es uno de los problemas más importantes, complejos y fascinantes de la
+ biología.
+ Muchas áreas de la ciencia se han unido para buscar una solución, pero
+ hasta hoy únicamente se han obtenido aproximaciones de la estructura 3D.
+ El proceso de plegamiento es relevante para dos problemas distintos pero
+ relacionados entre ellos: la predicción de la estructura 3D a partir de
+ su secuencia de aminoácidos; y entender el proceso subyacente del proceso
+ de plegamiento.
+ Para el primero el interés radica únicamente en la prediccoón de la estructura
+ de una proteína objetivo desconocida.
+ Para el segundo lo importante es entender los mecanismos, las fuerzas y
+ las interacciones que dirigen las proteínas para alzanzar su estado estable
+ final.
 \end_layout
 
 \begin_layout Subsection
 Simulaciones de Plegamiento
+\end_layout
+
+\begin_layout Standard
+Las predicciones de la estructura de una proteína se han llevado a cabo
+ principalmente usando técnicas de comparación y simulación.
+ La comparación es útil cuando existe información de otras proteínas con
+ características similares a la objetivo.
+ En caso contrario la técnica a usar es la simulación del proceso.
+ Estas simulaciones se realizan principalmente usando dinámica molecular,
+ la cual es una técnica computacional que permite predecir propiedades estáticas
+ y dinámicas de la proteína a partir de las interacciones entre sus moléculas.
+ Además de esta técnica hay otros métodos de simulación y estudio del plegamient
+o de la proteína, tal como el Probabilistic Roadmap Method que construye
+ la ruta de plegamiento de la proteína o la secuencia de eventos que la
+ proteína probablemente sigue para alzanzar su estado nativo.
 \end_layout
 
 \begin_layout Standard
@@ -708,33 +738,60 @@ Algoritmos de Agrupamiento Clásicos (MMart)
 Intro?
 \end_layout
 
+\begin_layout Standard
+Los algoritmos de agrupamiento (o de 
+\emph on
+clustering
+\emph default
+, como son generalmente conocidos) buscan organizar un conjunto de objetos
+ en grupos significativos.
+ Estos grupos pueden ser disyuntos, sobrelapados u organizados de una manera
+ jerárquica.
+ El elemento clave en un agrupamiento es descubrir grupos que tienen un
+ significado.
+ El significado dependerá del problema particular.
+ Los algoritmos de 
+\emph on
+clustering 
+\emph default
+constituyen una herramienta exploratoria para analizar conjuntos de datos
+ extensos, y tienen aplicaciones en múchas áreas
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhao2005"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+........
+\end_layout
+
 \begin_layout Subsubsection
 K-Means
 \end_layout
 
 \begin_layout Standard
-K-Means es un algoritmo bien conocido para clustering.
+K-Means es un tipo de aprendizaje no supervisado el cual es usado cuando
+ se quiere categorizar datos.
+ La meta del algoritmo es encontrar grupos en los datos, siendo K el numero
+ de grupos.
+ El algoritmo asigna de manera iterativa cada punto de los datos a uno de
+ los K grupos basado en las características que le son provistas.
+ Los puntos son particionados de acuerdo a una similitud entre las característic
+as.
  Este algoritmo agrupa los datos basado en su cercanía de acuerdo a la distancia
  euclidiana.
- Toma K
-\begin_inset script subscript
-
-\begin_layout Plain Layout
-y
-\end_layout
-
-\end_inset
-
- como parámetro de entrada y particiona un conjunto de n objetos en K
-\begin_inset script subscript
-
-\begin_layout Plain Layout
-y
-\end_layout
-
-\end_inset
-
-clusters
+ Como salida, el algoritmo retorna los centroides de los K clusters, los
+ cuales pueden ser usados para etiquetar nuevos datos..
+ El método tiene algunos puntos débiles, por ejemplo, encontrar el valor
+ de K puede ser difícil y los resultados finales varían debido a las inicializac
+iones aleatorias de las particiones.
+ Otro aspecto importante es que el algoritmo K-means es sensible a datos
+ atípicos, puesto que una media es influenciada fácilmente por valores extremos
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Arora2016"
@@ -743,11 +800,6 @@ literal "false"
 \end_inset
 
 .
- El método tiene algunos puntos débiles, por ejemplo, encontrar el valor
- de K puede ser difícil y los resultados finales varían debido a las inicializac
-iones aleatorias de las particiones.
- Otro aspecto importante es que el algoritmo K-means es sensible a datos
- atípicos, puesto que una media es influenciada fácilmente por valores extremos.
 \end_layout
 
 \begin_layout Subsubsection
