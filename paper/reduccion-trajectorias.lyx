@@ -607,6 +607,53 @@ o de la proteína, tal como el Probabilistic Roadmap Method que construye
 \end_layout
 
 \begin_layout Standard
+Si bien es cierto que las técnicas para estudiar el plegamiento de proteínas
+ ha mejorado en los últimos tiempos, aún se encuentran limitados en cuanto
+ a los detalles del mismo.
+ Por esta razón, varias estrategias computacionaes han emergido como enfoques
+ complementarios, siendo en algunos casos el único mecanismo para obtener
+ una buena aproximación de los detalles de la dinámica de una proteína.
+ Existen diversas técnicas de simulación que permiten el estudio del plegamiento
+ de proteínas desde diferentes enfoques.
+ Se describen en esta sección tres de ellas.
+ Una técnica con nivel de detalle atómico como la Dinámica Molecular; y
+ fos técnicas con un nivel de detalle más reducido: Una técnica de muestreo
+ llamada Probabilistic Roadmap Method (PRM) y una técnica que usa un enfoque
+ de fragmentos.
+\end_layout
+
+\begin_layout Subsubsection
+Dinámica Molecular
+\end_layout
+
+\begin_layout Standard
+El la actualidad la técnica de Dinámica Molecular (DM) es una de las principales
+ herramientas para el estudop de molécuñas y produce movimientos físicos
+ de átomos altamente realísticos, así como trajectorias de plegamiento de
+ proteínas
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Pande2008"
+literal "false"
+
+\end_inset
+
+.
+ Uno de us principales resultados es una serie de 
+\emph on
+snapshots 
+\emph default
+de las posiciones y velocidades de los átomos como una función del tiempo,
+ representando una trayectoria del sistema, lo que corresponde a una ruta
+ de transición de alta resolución.
+ DM lleva la traza de las posiciones y las velocidades de los átomos de
+ la proteína y como interactúan entre ellos y responden a fuerzas externas.
+ DM calcula el movimiento de todas las partículas de las proteínas intergrando
+ numéricamente las ecuaciones de movimiento de Newton de manera simultánea
+ y repetidamente en pequeños pasos de tiempo durante un periodo determinado.
+\end_layout
+
+\begin_layout Standard
 \begin_inset Note Note
 status collapsed
 
@@ -735,10 +782,6 @@ Algoritmos de Agrupamiento Clásicos (MMart)
 \end_layout
 
 \begin_layout Standard
-Intro?
-\end_layout
-
-\begin_layout Standard
 Los algoritmos de agrupamiento (o de 
 \emph on
 clustering
@@ -764,10 +807,6 @@ literal "false"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-........
 \end_layout
 
 \begin_layout Subsubsection
