@@ -345,6 +345,30 @@ ión de las estrucutras no puede ser realizada de la manera más efectiva
  por el algoritmo que optimiza el RMSD global.
 \end_layout
 
+\begin_layout Standard
+Otro aspecto importante observado en esta métrica es un efecto observado
+ en sistemas macromoleculares muy grandes, donde los efectos de la dimensionalid
+ad producen lo que se conoce como 
+\begin_inset Quotes cld
+\end_inset
+
+la maldición de la dimensionalidad
+\begin_inset Quotes crd
+\end_inset
+
+, haciendo referencia a una capacidad decreciente para discriminar la diferencia
+ entre pares de conformaciones a medida que aumenta el tamaño del sistema
+ e impactando de esta manera el análisis basado en RMSD
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sargsyan2017"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsubsection
 GDT
 \end_layout
@@ -366,7 +390,17 @@ do comparado con una estructura de referencia.
  un aumento en el umbral implica un aumento en el score.
  Si esto no es así, es posible que sea un indicador de que la divergencia
  entre la estructura referencia y el modelo es muy alta.
- 
+ Uno de los problemas de la técnica es que la elección del valor de los
+ umbrales es subjetiva y necesitan ser ajustados manualmente para diferentes
+ categorías de objetivos de modelado
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Xu2010"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -382,7 +416,15 @@ TM-score (Template modeling score) es otra medida de similitud entre dos
  Un puntaje de menos de 0.20 indica una comparación entre dos proteínas aleatoria
 s no relacionadas entre sí.
  Esta métrica está diseñada para ser independiente de la longitud de las
- proteínas que se están comparando.
+ proteínas que se están comparando
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhan2004"
+literal "false"
+
+\end_inset
+
+.
  
 \end_layout
 
@@ -531,18 +573,6 @@ Plegamiento de Proteínas (MMart)
 \end_layout
 
 \begin_layout Standard
-Revisar sección 2.2  Tesis LG
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Garreta2015"
-literal "true"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
 El estado nativo de una proteína se catracteriza por una cadena de aminoácidos
  organizados en una estructura 3D estable y plegada.
  Los enlaces de hidrógeno estabilizan la estructura; el core interno está
@@ -573,7 +603,15 @@ El problema de plegamiento de proteínas se enfoca en la manera en cómo una
  proteína se pliega desde su secuencia de aminoácidos hasta una estructura
  estable en 3D.
  Es uno de los problemas más importantes, complejos y fascinantes de la
- biología.
+ biología, y lleva más de 50 años en vigencia
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dill2012a"
+literal "false"
+
+\end_inset
+
+.
  Muchas áreas de la ciencia se han unido para buscar una solución, pero
  hasta hoy únicamente se han obtenido aproximaciones de la estructura 3D.
  El proceso de plegamiento es relevante para dos problemas distintos pero
@@ -604,12 +642,24 @@ Las predicciones de la estructura de una proteína se han llevado a cabo
 o de la proteína, tal como el Probabilistic Roadmap Method que construye
  la ruta de plegamiento de la proteína o la secuencia de eventos que la
  proteína probablemente sigue para alzanzar su estado nativo.
+ 
 \end_layout
 
 \begin_layout Standard
 Si bien es cierto que las técnicas para estudiar el plegamiento de proteínas
  ha mejorado en los últimos tiempos, aún se encuentran limitados en cuanto
  a los detalles del mismo.
+ Por ejemplo, los estudios experimentales de plegamiento de proteínas se
+ ven obstaculizados por el hecho de que sólo se pueden obtener datos estructural
+es de baja resolución con una resolución temporal suficiente
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Freddolino2010c"
+literal "false"
+
+\end_inset
+
+.
  Por esta razón, varias estrategias computacionaes han emergido como enfoques
  complementarios, siendo en algunos casos el único mecanismo para obtener
  una buena aproximación de los detalles de la dinámica de una proteína.
@@ -661,10 +711,10 @@ Modelar las fuerzas en este proceso requiere la definición de una función
  Si bien DM produce simulaciones físicamente realísticas, es computacionalmente
  costoso y solamente se pueden simular proteínas pequeñas en tiempos factibiles,
  convirtiéndose de esta manera en un desafío computacional la simulación
- de proteínas más grandes en escaloas de milisegundos
+ de proteínas más grandes en escalas de milisegundos
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Garreta2015"
+key "Garreta2015,Chowdhury2003"
 literal "false"
 
 \end_inset
@@ -748,40 +798,6 @@ literal "false"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-An MD computation simulates the motion of a collection of atoms (the chemical
- system) over a period of time accord- ing to the laws of classical physics.1
- Time is broken into a series of discrete time steps, each representing
- a few fem- toseconds of simulated time.
- A time step has two major phases.
- Force calculation computes the force on each par- ticle due to other particles
- in the system.
- Integration uses the net force on each particle to update that particle’s
- posi- tion and velocity [Shaw08]
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Revisar secciones 2.7, especialmente la 2.7.1.
- de Tesis LG 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Garreta2015"
-literal "true"
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
