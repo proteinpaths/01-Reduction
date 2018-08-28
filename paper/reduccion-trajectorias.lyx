@@ -628,7 +628,7 @@ Dinámica Molecular
 
 \begin_layout Standard
 El la actualidad la técnica de Dinámica Molecular (DM) es una de las principales
- herramientas para el estudop de molécuñas y produce movimientos físicos
+ herramientas para el estudio de moléculas y produce movimientos físicos
  de átomos altamente realísticos, así como trajectorias de plegamiento de
  proteínas
 \begin_inset CommandInset citation
@@ -651,6 +651,103 @@ de las posiciones y velocidades de los átomos como una función del tiempo,
  DM calcula el movimiento de todas las partículas de las proteínas intergrando
  numéricamente las ecuaciones de movimiento de Newton de manera simultánea
  y repetidamente en pequeños pasos de tiempo durante un periodo determinado.
+\end_layout
+
+\begin_layout Standard
+Modelar las fuerzas en este proceso requiere la definición de una función
+ de potencial muy detallada y precisa en la forma de ecuaciones y parámetros
+ que describan las interacciones entre las partículas de un sistema y retornen
+ su energía potencial como función de sus conformaciones.
+ Si bien DM produce simulaciones físicamente realísticas, es computacionalmente
+ costoso y solamente se pueden simular proteínas pequeñas en tiempos factibiles,
+ convirtiéndose de esta manera en un desafío computacional la simulación
+ de proteínas más grandes en escaloas de milisegundos
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Garreta2015"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Probabilistic Roadmap Method (PRM)
+\end_layout
+
+\begin_layout Standard
+El método de PRM es una adaptación para el plegamiento de proteínas de otro
+ desarrollado para la planeación de movimiento robótico en un 
+\begin_inset Quotes cld
+\end_inset
+
+robót
+\begin_inset Quotes crd
+\end_inset
+
+ que comienza en una posición inicial y busca una ruta de movimientos factible
+ para alcanzar una posición objetivo
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Amato2002,Apaydin2003"
+literal "false"
+
+\end_inset
+
+.
+ En el contexto de plegamiento de proteínas, se puede interpretar como el
+ problema de encontrar un camino de plegamiento factible que una proteína
+ pueda seguir desde un estado no plegado hasta su estado nativo.
+ El método PRM modela el paisaje energético (
+\emph on
+landscape
+\emph default
+) de una proteína como hoja de ruta definida por un grafo de movimiento
+ válidos en el 
+\emph on
+landscape
+\emph default
+.
+ Los nodos representan estados (conformaciones de proteínas) y las aristas
+ representan transiciones (cambios de estado).
+ PRM hace un muestreo de todas las conformaciones válidas (espacio conformaciona
+l) de la proteína y las agrega a la hoja de ruta.
+ Luego conecta los vecinos donde las transiciones son válidas.
+ Finalmente extrae rutas de plegamiento de la hoja de ruta usando un algoritmo
+ de búsqueda el cual encuentra la secuencia de posibles estados intermedios
+ que conecta las conformaciones inicial y objetivo, esto es, la ruta ed
+ plegamiento de la proteína.
+\end_layout
+
+\begin_layout Standard
+PRM es menos realístico físicamente que MD, ya que en la búsqueda de 
+\begin_inset Quotes cld
+\end_inset
+
+todas
+\begin_inset Quotes crd
+\end_inset
+
+ las conformaciones posibles en realidad se tienen en cuenta ciertas restriccion
+es por la imposinilidad técnica de tener en cuenta la totalidad de comformacione
+s.
+ Generalmente se usa una alteración en los ángulos dihédricos para generar
+ distintas conformaciones, o se establecen transiciones dependiendo de una
+ evaluación de la energía potencial de la nueva conformación, eligiéndose
+ esta si presenta una reducción energética.
+ Por ser menos realísta, este método es menos demandante computacionalmente,
+ y ha sido usado para estudiar problemas de alta dimensión en dominios molecular
+es
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Thomas2006,Chiang2010,Garreta2015"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard

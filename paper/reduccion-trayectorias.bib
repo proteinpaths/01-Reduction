@@ -280,6 +280,82 @@ title = {{Computer Simulations of Protein Folding}},
 url = {http://ebook.rsc.org/?DOI=10.1039/9781847558282-00161},
 year = {2008}
 }
+@article{Amato2002,
+abstract = {We present a framework for studying protein folding pathways and potential landscapes which is based on techniques recently developed in the robotics motion planning community. Our focus in this work is to study the protein folding mechanism assuming we know the native fold. That is, instead of performing fold prediction, we aim to study issues related to the folding process, such as the formation of secondary and tertiary structure, and the dependence of the folding pathway on the initial denatured conformation. Our work uses probabilistic roadmap (PRM) motion planning techniques which have proven successful for problems involving high-dimensional configuration spaces. A strength of these methods is their efficiency in rapidly covering the planning space without becoming trapped in local minima. We have applied our PRM technique to several small proteins ({\~{}}60 residues) and validated the pathways computed by comparing the secondary structure formation order on our paths to known hydrogen exchange experimental results. An advantage of the PRM framework over other simulation methods is that it enables one to easily and efficiently compute folding pathways from any denatured starting state to the (known) native fold. This aspect makes our approach ideal for studying global properties of the protein's potential landscape, most of which are difficult to simulate and study with other methods. For example, in the proteins we study, the folding pathways starting from different denatured states sometimes share common portions when they are close to the native fold, and moreover, the formation order of the secondary structure appears largely independent of the starting denatured conformation. Another feature of our technique is that the distribution of the sampled conformations is correlated with the formation of secondary structure and, in particular, appears to differentiate situations in which secondary structure clearly forms first and those in which the tertiary structure is obtained more directly. Overall, our results applying PRM techniques are very encouraging and indicate the promise of our approach for studying proteins for which experimental results are not available.},
+author = {Amato, Nancy M. and Song, Guang},
+doi = {10.1089/10665270252935395},
+issn = {1066-5277},
+journal = {Journal of computational biology : a journal of computational molecular cell biology},
+keywords = {Computational Biology,Models,Molecular,PRM,Protein Conformation,Protein Folding,Protein Structure,Secondary,Statistical,Thermodynamics},
+mendeley-tags = {PRM},
+month = {apr},
+number = {2},
+pages = {149--68},
+pmid = {12015875},
+title = {{Using motion planning to study protein folding pathways.}},
+url = {http://www.ncbi.nlm.nih.gov/pubmed/12015875 http://www.liebertpub.com/doi/10.1089/10665270252935395},
+volume = {9},
+year = {2002}
+}
+@article{Apaydin2003,
+abstract = {Classic molecular motion simulation techniques, such as Monte Carlo (MC) simulation, generate motion pathways one at a time and spend most of their time in the local minima of the energy landscape defined over a molecular conformation space. Their high computational cost prevents them from being used to compute ensemble properties (properties requiring the analysis of many pathways). This paper introduces stochastic roadmap simulation (SRS) as a new computational approach for exploring the kinetics of molecular motion by simultaneously examining multiple pathways. These pathways are compactly encoded in a graph, which is constructed by sampling a molecular conformation space at random. This computation, which does not trace any particular pathway explicitly, circumvents the local-minima problem. Each edge in the graph represents a potential transition of the molecule and is associated with a probability indicating the likelihood of this transition. By viewing the graph as a Markov chain, ensemble properties can be efficiently computed over the entire molecular energy landscape. Furthermore, SRS converges to the same distribution as MC simulation. SRS is applied to two biological problems: computing the probability of folding, an important order parameter that measures the "kinetic distance" of a protein's conformation from its native state; and estimating the expected time to escape from a ligand-protein binding site. Comparison with MC simulations on protein folding shows that SRS produces arguably more accurate results, while reducing computation time by several orders of magnitude. Computational studies on ligand-protein binding also demonstrate SRS as a promising approach to study ligand-protein interactions.},
+author = {Apaydin, Mehmet Serkan and Brutlag, Douglas L. and Guestrin, Carlos and Hsu, David and Latombe, Jean-Claude and Varma, Chris},
+doi = {10.1089/10665270360688011},
+issn = {1066-5277},
+journal = {Journal of Computational Biology},
+month = {jun},
+number = {3-4},
+pages = {257--281},
+pmid = {12935328},
+title = {{Stochastic Roadmap Simulation: An Efficient Representation and Algorithm for Analyzing Molecular Motion}},
+url = {http://www.ncbi.nlm.nih.gov/pubmed/12935328 http://www.liebertpub.com/doi/10.1089/10665270360688011},
+volume = {10},
+year = {2003}
+}
+@incollection{Thomas2006,
+author = {Thomas, Shawna and Tang, Xinyu and Tapia, Lydia and Amato, Nancy M.},
+booktitle = {Lecture Notes in Computer Science, vol 3909},
+doi = {10.1007/11732990_33},
+pages = {394--409},
+publisher = {Springer, Berlin, Heidelberg},
+title = {{Simulating Protein Motions with Rigidity Analysis}},
+url = {http://link.springer.com/10.1007/11732990{\_}33},
+year = {2006}
+}
+@article{Chiang2010,
+abstract = {Molecular dynamics (MD) simulation is a well-established method for studying protein motion at the atomic scale. However, it is computationally intensive and generates massive amounts of data. One way of addressing the dual challenges of computation efficiency and data analysis is to construct simplified models of long-timescale protein motion from MD simulation data. In this direction, we propose to use Markov models with hidden states, in which the Markovian states represent potentially overlapping probabilistic distributions over protein conformations. We also propose a principled criterion for evaluating the quality of a model by its ability to predict long-timescale protein motions. Our method was tested on 2D synthetic energy landscapes and two extensively studied peptides, alanine dipeptide and the villin headpiece subdomain (HP-35 NleNle). One interesting finding is that although a widely accepted model of alanine dipeptide contains six states, a simpler model with only three states is equally good for predicting long-timescale motions. We also used the constructed Markov models to estimate important kinetic and dynamic quantities for protein folding, in particular, mean first-passage time. The results are consistent with available experimental measurements.},
+author = {Chiang, Tsung-Han and Hsu, David and Latombe, Jean-Claude},
+doi = {10.1093/bioinformatics/btq177},
+file = {::},
+issn = {1367-4811},
+journal = {Bioinformatics (Oxford, England)},
+month = {jun},
+number = {12},
+pages = {i269--77},
+pmid = {20529916},
+publisher = {Oxford University Press},
+title = {{Markov dynamic models for long-timescale protein motion.}},
+url = {http://www.ncbi.nlm.nih.gov/pubmed/20529916 http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=PMC2881362},
+volume = {26},
+year = {2010}
+}
+@phdthesis{Garreta2015,
+abstract = {Thesis about protein folding in the intermediate states},
+author = {Garreta, Luis},
+file = {::},
+keywords = {Clustering Concepts,MDS,Measures,PCA ConceptsA Concepts,Protein Folding,Thesis Proteins,Trajectory Analysis,lgarreta01},
+mendeley-tags = {Clustering Concepts,MDS,Measures,PCA ConceptsA Concepts,Protein Folding,Thesis Proteins,Trajectory Analysis},
+number = {October},
+pages = {114},
+school = {Universidad del Valle},
+title = {{Conformational Folding Status and Folding Levels Based on Global Protein Properties : a Computational Approach}},
+year = {2015}
+}
+
+
+
+
+
 
 
 
