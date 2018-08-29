@@ -303,7 +303,17 @@ ciegas
 \begin_inset Quotes crd
 \end_inset
 
- de proteínas recientemente resueltas pero sin publicar.
+ de proteínas recientemente resueltas pero sin publicar, convirtiendose
+ así en una medida del estado del arte en modelamiento de estructuras de
+ proteínas a partir de su secuencia de aminoácidos
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Moult2014"
+literal "false"
+
+\end_inset
+
+.
  Con esto se puede decir que los métodos de comparación de estructuras han
  estado en desarrollo activo y se han usado en el campo de la modelación
  computacional específicamente para medir la calidad de los modelos predichos.
@@ -793,6 +803,57 @@ es
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Thomas2006,Chiang2010,Garreta2015"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Métodos de ensamblaje de fragmentos
+\end_layout
+
+\begin_layout Standard
+La motivación para estos métodos es que las secuencias locales en la proteína
+ tienen preferencias seleccionadas para estructuras locales específicas,
+ y que la estructura de la proteína completa es el resutado de la interacción
+ de aquellas estructuras locales y las no locales.
+ El método Rossetta 
+\emph on
+ab initio 
+\emph default
+es uno de los ejemplos más exitosos de este enfoque
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bonneau2002"
+literal "false"
+
+\end_inset
+
+.
+ Rosetta obtiene las estructuras locales a partir de una librería de estructuras
+ cocidas observadas en proteínas resueltas (por ejemplo el 
+\emph on
+Protein Data Bank
+\emph default
+) y las combina de manera aleatoria para ensamblar las conformaciones individual
+es
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Garreta2015"
+literal "false"
+
+\end_inset
+
+.
+ La búsqueda Monte Carlo de recocido simulado se usa para combinar las estructur
+as locales, y se usa una función de puntaje que evalúa que tan adecuada
+ es a través de una función basada en estadísticas conformacionales de estructur
+as conocidas
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rohl2004a"
 literal "false"
 
 \end_inset
