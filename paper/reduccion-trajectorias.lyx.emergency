@@ -361,51 +361,13 @@ Antecedentes
 \end_layout
 
 \begin_layout Standard
-La mayoría de trabajos que encontramos en la literatura están orientados
- a la reducción de trayectorias de simulación de plegamiento de proteínas
- a través de la transformación de las estructuras a una nueva representación
- que contiene los elementos principales o que mejor la describen.
- Esta nueva representación transforma  
+La reducción de trayectorías se ha enfocado principalmente a dos ve
 \end_layout
 
 \begin_layout Standard
-.
- Una de las técnicas más usuadas para reducción de trayectorias de simulación
- de plegamiento de proteínas ha sido el análisis de componentes principales
- (PCA) 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Duan2013"
-literal "false"
-
-\end_inset
-
-, el cual transforma la estructura de la proteína desde un espacio N-dimensional
-–dado por los puntos de datos representados por las N coordenadas de sus
- átomos–a un espacio lineal K-dimensional (K < D) que corresponde a un nuevo
- sistema de coordenadas llamado componentes principales.
- Estos componentes representan los vectores tangentes que describen un hiperplan
-o que pasa a través de los puntos de datos tanto como sea posible cuando
- se evalúan sus mínimos cuadrados.
- Estos componentes se ordenan de acuerdo a su varianza y los primeros componente
-s (mayor varianza) son los más importantes y que resumen los cambios conformacio
-nales globales de la proteína.
- Sin embargo PCA tiene problemas cuando los espacios son no-lineales, como
- se piensa que es el espacio conformacional de la proteína y por lo tanto
- el nuevo espacio K-dimensional puede resultar distorsionado 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Das2006"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-selección de las características principales que resumen la trayectoría,
- por ejemplo......
+La mayoría de trabajos que encontramos están orientados a la reducción de
+ trayectorias de plegamiento a través de la selección de las características
+ principales que resumen la trayectoría, por ejemplo......
  Sin embargo, nuestro enfoque es diferente al de estos trabajos ya que nosotros
  nos enfocamos en seleccionar las estructuras más representativas de la
  trayectoría y que en últimas representan también un resumen de la misma.
@@ -528,37 +490,11 @@ Otros
 \end_layout
 
 \begin_layout Standard
-Una de las técnicas más usuadas para reducción de trayectorias de simulación
- de plegamiento de proteínas ha sido el análisis de componentes principales
- (PCA) 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Duan2013"
-literal "false"
-
-\end_inset
-
-, el cual transforma la estructura de la proteína desde un espacio N-dimensional
-–dado por los puntos de datos representados por las N coordenadas de sus
- átomos–a un espacio lineal K-dimensional (K < D) que corresponde a un nuevo
- sistema de coordenadas llamado componentes principales.
- Estos componentes representan los vectores tangentes que describen un hiperplan
-o que pasa a través de los puntos de datos tanto como sea posible cuando
- se evalúan sus mínimos cuadrados.
- Estos componentes se ordenan de acuerdo a su varianza y los primeros componente
-s (mayor varianza) son los más importantes y que resumen los cambios conformacio
-nales globales de la proteína.
- Sin embargo PCA tiene problemas cuando los espacios son no-lineales, como
- se piensa que es el espacio conformacional de la proteína y por lo tanto
- el nuevo espacio K-dimensional puede resultar distorsionado 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Das2006"
-literal "false"
-
-\end_inset
-
-.
+Una de las técnicas más usuadas para reducción de trayectorias ha sido el
+ análisis de componentes principales (PCA), la cual transforma la estructura
+ de la proteína desde un espacio N-dimensional dado por sus N coordenadas
+ XYZ de sus átomos a un espacio K-dimensional dado por los K componentes
+ 
 \end_layout
 
 \begin_layout Standard
@@ -591,7 +527,7 @@ Yang2007:
  contact map, which captures the pair-wise 3D distances between residues.
  We extract non-local bit-patterns from these con-tact maps.
  We then use an entropy-based clustering algo-rithm to cluster such bit-patterns
- yinto groups.
+ into groups.
  These bit-patterns are further associated to form spatial object asso-ciation
  patterns (SOAPs).
  By using SOAPs, we are able to effectively summarize and analyze folding

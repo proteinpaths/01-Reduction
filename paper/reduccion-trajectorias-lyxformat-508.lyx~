@@ -1,5 +1,5 @@
-#LyX 2.3 created this file. For more info see http://www.lyx.org/
-\lyxformat 544
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
 \begin_document
 \begin_header
 \save_transient_properties true
@@ -35,8 +35,6 @@
 \font_osf false
 \font_sf_scale 100 100
 \font_tt_scale 100 100
-\use_microtype false
-\use_dash_ligatures false
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -66,7 +64,6 @@
 \suppress_date false
 \justification true
 \use_refstyle 1
-\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -79,10 +76,7 @@
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\is_math_indent 0
-\math_numbering_side default
-\quotes_style swiss
-\dynamic_quotes 0
+\quotes_language french
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -132,7 +126,6 @@ Actualmente se están liberando con más frecuencia datos de simulaciones
 \begin_inset CommandInset citation
 LatexCommand cite
 key "PandeEnsign07"
-literal "true"
 
 \end_inset
 
@@ -145,7 +138,6 @@ a.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Shaw2011,Shaw2008"
-literal "true"
 
 \end_inset
 
@@ -180,7 +172,6 @@ Otra forma de reducir estas trayectorias es crear agrupamientos rápidos
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hobohm1992"
-literal "true"
 
 \end_inset
 
@@ -199,60 +190,7 @@ literal "true"
 
 \begin_layout Standard
 \begin_inset Note Note
-status open
-
-\begin_layout Plain Layout
-
-\series bold
-Intros:
-\end_layout
-
-\begin_layout Itemize
-
-\series bold
-Yang2010:
-\end_layout
-
-\begin_deeper
-\begin_layout Plain Layout
-How does a protein fold into its biologically functional three-dimensional
- (3D) structure? This problem remains one of the greatest challenges in
- structural biology [Dill & Chan 1997, Dobson 2003,].
- However, recent advances in experimental technologies and computational
- theories have led researchers closer to solving this problem [Dinner et
- al.
- 2000, Pande, 2003, Onuchic & Wolynes, 2004].
- Specifically, computer simulations based on theories in molecular dynamics
- have allowed scientists to gain insights into the folding process at an
- unprecedented temporal and spatial resolution, for instance, at the atomistic
- level with femtosecond (10-15 s) scale [Dauber-Osguthorpe et al.
- 1996, Raman et al.
- 2008, Snow et al., 2002, van der Spoel & Seibert 2006, Wallin & Shakhnovich
- 2008].
- The product of such simulations is a collection of folding trajectories
- of the protein under study, where each trajectory consists of an ordered
- sequence of 3D structures sampled during the folding simulation.
- In this article, we refer to each 3D structure on a trajectory as a frame.
- A trajectory essentially depicts the evolving path that a protein acquires
- its final 3D structure from an initially random structure.
- Figure 1 illustrates four frames along a folding trajectory of a designed
- protein Beta3S.
- By analyzing these folding trajectories, researchers have gained invaluable
- insights in understanding the nature of the folding process such as key
- residues [Vendruscol et al., 2001] and different folding mechanisms (e.g.,
- the nucleation-condensation model [White et al., 2005]).
- These findings have also been subsequently verified by experimental methods.
-\end_layout
-
-\end_deeper
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status open
+status collapsed
 
 \begin_layout Subsection
 Contexto
@@ -361,268 +299,182 @@ Antecedentes
 \end_layout
 
 \begin_layout Standard
-La mayoría de trabajos que encontramos en la literatura están orientados
- a la reducción de trayectorias de simulación de plegamiento de proteínas
- a través de la transformación de las estructuras a una nueva representación
- que contiene los elementos principales o que mejor la describen.
- Esta nueva representación transforma  
-\end_layout
-
-\begin_layout Standard
-.
- Una de las técnicas más usuadas para reducción de trayectorias de simulación
- de plegamiento de proteínas ha sido el análisis de componentes principales
- (PCA) 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Duan2013"
-literal "false"
-
-\end_inset
-
-, el cual transforma la estructura de la proteína desde un espacio N-dimensional
-–dado por los puntos de datos representados por las N coordenadas de sus
- átomos–a un espacio lineal K-dimensional (K < D) que corresponde a un nuevo
- sistema de coordenadas llamado componentes principales.
- Estos componentes representan los vectores tangentes que describen un hiperplan
-o que pasa a través de los puntos de datos tanto como sea posible cuando
- se evalúan sus mínimos cuadrados.
- Estos componentes se ordenan de acuerdo a su varianza y los primeros componente
-s (mayor varianza) son los más importantes y que resumen los cambios conformacio
-nales globales de la proteína.
- Sin embargo PCA tiene problemas cuando los espacios son no-lineales, como
- se piensa que es el espacio conformacional de la proteína y por lo tanto
- el nuevo espacio K-dimensional puede resultar distorsionado 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Das2006"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-selección de las características principales que resumen la trayectoría,
- por ejemplo......
- Sin embargo, nuestro enfoque es diferente al de estos trabajos ya que nosotros
- nos enfocamos en seleccionar las estructuras más representativas de la
- trayectoría y que en últimas representan también un resumen de la misma.
- Algo parecido pero no igual a nuestro enfoque es lo que muchas de las herramien
-tas de simulación de plegamiento ofrecen en la selección de los tiempos
- de paso (
-\emph on
-time steps
-\emph default
-) en los cuales se toman los 
-\emph on
-snapshots 
-\emph default
-o la estructura correspondiente en esos tiempos.
- Nuestro enfoque trabaja sobre las trayectorias de plegamiento ya realizadas
- y disponibles como un conjunto de snapshots a determinado 
-\emph on
-time step 
-\emph default
-y sobre estás realiza la selección de las más representativas por segmentos
- de tiempo que se ingresan como parámetros.
- El resultado es otra trayectoría con estructuras que representan de forma
- resumidad la trayectoria original y que contiene los evento o estructuras
- principales.
- El algoritmo se puede ajustar con diferentes parámetros para definir el
- tamaño de las particiones en número de conformaciones y número de representativ
-as por cada partición, por ejemplo se puede definir que cada 1000 conformaciones
- se seleccionen 500 representativas, lo que reduce a la mitad el número
- de conformaciones, o cada 10000 conformaciones se selecciones 100, lo que
- la reduce a la trayectoria en 99%.
-\end_layout
-
-\begin_layout Standard
-Rajan
+En esta sección describiremos los elementos básicos que se manejan en este
+ trabajo, principalmente hablaremos de plegamiento de proteína, simulaciones
+ de plegamiento de proteínas, trayectorias de plegamiento y métodos de reducción
+ de datos biológicos:
 \end_layout
 
 \begin_layout Subsection
-Yang2007
+Métodos de Comparación de Estructuras de Proteínas (MMart)
 \end_layout
 
 \begin_layout Standard
-Yang et al.
- 2007 
+Revisar [
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Yang2007"
-literal "false"
+key "Kufareva2015"
 
 \end_inset
 
- usa mapas de contacto 2D (matrices de distancias binaria) para representar
- las estructuras 3D de las trayectoria de plegamiento a través de lo que
- ellos definen como patrones de objetos asociados espacialmente o 
-\emph on
-SOAPs.
-
-\emph default
- Estos SOAPs representan los patrones 2D no locales que se encuentran en
- los mapas de contacto de la estructura de las proteínas.
- Se encuentran los SOAPs de todas las estructuras de la trayectoria, se
- los agrupa por SOAPs comúnes de acuerdo a una medida de distancia, y se
- obtienen los más representativos o más frecuentes.
- Entonces el proceso de reducción propuesto por los autores consiste en
- representar la estructura de la proteína con los SOAPs más característicos
- que esta contenga, es decir, partes de la estructura que no correspondan
- a un SOAP frecuente no van en la representación, lo que segun ĺo autores
- lleva a una representación más concisa de la estructura de la proteína
- y por consiguiente a una reducción en toda la trayectoria.
- Esta forma de reducción la utilizan para análizar el plegamiento de proteínas
- y caracterizar los motivos 3D asociados a SOAPs que se producen durante
- el plegamiento y como estos se mantiene o desaparecen en el plegamiento
- de proteínas específicas.
- Sin embargo, la reducción cambia sustancialmente los elementos de la trayectori
-a al trasladar las estructuras 3D a representaciones 2D, y de alguna forma
- se pierde información implicita en la estructura.
-\end_layout
-
-\begin_layout Subsection
-Rajan
-\end_layout
-
-\begin_layout Standard
-Rajan et al.
- 2010 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "RajanSchulten10"
-literal "false"
-
-\end_inset
-
- adaptan un método de escalamiento multidimensional no métrico (
-\emph on
-nMDS)
-\emph default
- para obtener una representación reducida 2D de toda la trayectoria.
- Inicialmente transforman la estructura 3D de la proteina a sus respectivos
- ángulos dihédricos para luego aplicarles el método de escalamiento y obtener
- un conjunto de puntos que representa las estructuras de proteínas.
- Estos puntos se despliegan sobre un espacio métrico (generalmente 2D) que
- representa la trayectoria de tal manera que la distancia cada par de puntos
- 
-\emph on
-x,y
-\emph default
- es consistente con las distancias de cada par de estructuras 
-\emph on
-X,Y
-\emph default
- representadas por los respectivos puntos.
- Aunque esta forma de reducción simplifica a 2D las estructuras N dimensionales
- (N coordenadas XYZ de sus átomos), la información de la estructura se sigue
- perdiento y la reducción se vuelve específica para ciertos análisis como
- el descrito en el artículo de observar el orden de formación de estructuras
- secundarias.
-\end_layout
-
-\begin_layout Subsection
-Otros
-\end_layout
-
-\begin_layout Standard
-Una de las técnicas más usuadas para reducción de trayectorias de simulación
- de plegamiento de proteínas ha sido el análisis de componentes principales
- (PCA) 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Duan2013"
-literal "false"
-
-\end_inset
-
-, el cual transforma la estructura de la proteína desde un espacio N-dimensional
-–dado por los puntos de datos representados por las N coordenadas de sus
- átomos–a un espacio lineal K-dimensional (K < D) que corresponde a un nuevo
- sistema de coordenadas llamado componentes principales.
- Estos componentes representan los vectores tangentes que describen un hiperplan
-o que pasa a través de los puntos de datos tanto como sea posible cuando
- se evalúan sus mínimos cuadrados.
- Estos componentes se ordenan de acuerdo a su varianza y los primeros componente
-s (mayor varianza) son los más importantes y que resumen los cambios conformacio
-nales globales de la proteína.
- Sin embargo PCA tiene problemas cuando los espacios son no-lineales, como
- se piensa que es el espacio conformacional de la proteína y por lo tanto
- el nuevo espacio K-dimensional puede resultar distorsionado 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Das2006"
-literal "false"
-
-\end_inset
-
-.
+].
+ La idea es definir que es RMSD, GDS, TM-score con las referencias.
+ Después empieza uno contras de RMSD (sensible), GDS (umbrales), y unos
+ pros sobre TM-score (no tiene umbrales, idenpendiente del nro de aminos).
 \end_layout
 
 \begin_layout Standard
 \begin_inset Note Note
-status open
+status collapsed
 
-\begin_layout Itemize
-
-\series bold
-Yang2007
-\series default
-: In A Spatio-temporal Mining Approach towards Summarizing and Analyzing
- Protein Folding Trajectories, Hui Yang, Srinivasan Parthasarathy and Duygu
- Ucar [6], describe a method to mine protein folding molecular dynamics
- simulations datasets.
- They describe a spatio-temporal association discovery approach to mine
- protein folding trajectories, to identify critical events and common pathways.
+\begin_layout Description
+TMscore:
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
+[
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhan2004"
 
-\series bold
-Yang2007:
-\series default
- Clearly, protein folding trajectories consist of both spatial and temporal
- components.
- Each protein in a MD simula- tion is composed of a number of residues spatially
- located in the 3D space that move over time.
- Each frame (or snap- shot) of the trajectory can be represented as a 2D
- contact map, which captures the pair-wise 3D distances between residues.
- We extract non-local bit-patterns from these con-tact maps.
- We then use an entropy-based clustering algo-rithm to cluster such bit-patterns
- yinto groups.
- These bit-patterns are further associated to form spatial object asso-ciation
- patterns (SOAPs).
- By using SOAPs, we are able to effectively summarize and analyze folding
- trajectories produced by MD simulations.
- A major advantage of this representation is its appropriateness for cross-compa
-rison across different simulations, as discussed in later sections.
+\end_inset
+
+Seminal
+\begin_inset space ~
+\end_inset
+
+Paper] Scoring
+\begin_inset space ~
+\end_inset
+
+function
+\begin_inset space ~
+\end_inset
+
+for
+\begin_inset space ~
+\end_inset
+
+automated
+\begin_inset space ~
+\end_inset
+
+assessment
+\begin_inset space ~
+\end_inset
+
+of
+\begin_inset space ~
+\end_inset
+
+protein
+\begin_inset space ~
+\end_inset
+
+structure
+\begin_inset space ~
+\end_inset
+
+template
+\begin_inset space ~
+\end_inset
+
+quality
+\begin_inset space ~
+\end_inset
+
+Zhang
+\begin_inset space ~
+\end_inset
+
+Y.
+\begin_inset space ~
+\end_inset
+
+Skolnick
+\begin_inset space ~
+\end_inset
+
+J.: We have developed a new scoring function, the template modeling score
+ (TM-score), to assess the quality of protein structure templates and predicted
+ full-length models by extending the approaches used in Global Distance
+ Test (GDT) and MaxSub.
+ First, a protein size-dependent scale is exploited to eliminate the inherent
+ protein size dependence of the previous scores and appropriately account
+ for random protein structure pairs.
+ Second, rather than setting specific distance cutoffs and calculating only
+ the fractions with errors below the cutoff, all residue pairs in alignment/mode
+ling are evaluated in the proposed score.
+ For comparison of various scoring functions, we have constructed a large-scale
+ benchmark set of structure templates for 1489 small to medium size proteins
+ using the threading program PROSPECTOR_3 and built the full-length models
+ using MODELLER and TASSER.
+ The TM-score of the initial threading alignments, compared to the GDT and
+ MaxSub scoring functions, shows a much stronger correlation to the quality
+ of the final full-length models.
+ The TM-score is further exploited as an assessment of all 'new fold' targets
+ in the recent CASP5 experiment and shows a close coincidence with the results
+ of human-expert visual assessment.
+ These data suggest that the TM-score is a useful complement to the fully
+ automated assessment of protein structure predictions.
+ © 2004 Wiley-Liss, Inc.
 \end_layout
 
-\begin_layout Itemize
+\begin_layout Description
+[https://zhanglab.ccmb.med.umich.edu/TM-score/]: TM-score is a metric for measuring
+ the structural similarity of two protein models.
+ It is designed to solve two major problems in the traditional metrics such
+ as root-mean-square deviation (RMSD): (1) TM-score measures the global
+ fold similarity and is less sensitive to the local structural variations;
+ (2) magnitude of TM-score for random structure pairs is length-independent.
+ TM-score has the value in (0,1], where 1 indicates a perfect match between
+ two structures.
+ Following strict statistics of structures in the PDB, scores below 0.17
+ corresponds to randomly chosen unrelated proteins whereas with a score
+ higher than 0.5 assume generally the same fold in SCOP/CATH.
+ 
+\end_layout
 
-\series bold
-Yang2010: 
-\series default
-In this step, we first transform a folding trajectory from a series of 3D
- structures to a series of 2D contact maps.
- We then define the concept of 2D non-local patterns and consequently extract
- them.
- Finally, we categorize these 2D patterns into different groups such that
- the patterns in the same group are approximately similar to each other
- based on their geometric features.
- Note that Yang et al.
- first introduced such 2D non-local patterns and applied them for protein
- folding data analysis [Yang et al., 2007].
- We include them here to make this algorithm self-contained and to facilitate
- our discussion on the importance of this step towards the identification
- of 3D structural motifs.
+\begin_layout Description
+[https://en.wikipedia.org/wiki/Template_modeling_score] bioinformatics, the
+ template modeling score or TM-score is a measure of similarity between
+ two protein structures with different tertiary structures.
+ The TM-score is intended as a more accurate measure of the quality of full-leng
+th protein structures than the often used RMSD and GDT measures.
+ The TM-score indicates the difference between two structures by a score
+ between ( 0 , 1 ] {
+\backslash
+displaystyle (0,1]} {
+\backslash
+displaystyle (0,1]}, where 1 indicates a perfect match between two structures
+ (thus the higher the better).[1] Generally scores below 0.20 corresponds
+ to randomly chosen unrelated proteins whereas structures with a score higher
+ than 0.5 assume roughly the same fold.[2] A quantitative study [3] shows
+ that proteins of TM-score = 0.5 have a posterior probability of 37% in the
+ same CATH topology family and of 13% in the same SCOP fold family.
+ The probabilities increase rapidly when TM-score > 0.5.
+ The TM-score is designed to be independent of protein lengths.
+ Contents
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Plegamiento de Proteínas (MMart)
+\end_layout
+
+\begin_layout Standard
+Revisar sección 2.2  Tesis LG
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Garreta2015"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -661,26 +513,6 @@ An MD computation simulates the motion of a collection of atoms (the chemical
  posi- tion and velocity [Shaw08]
 \end_layout
 
-\begin_layout Itemize
-
-\series bold
-Yang2007:
-\series default
- Protein Folding Trajectories Advances in high-performance computing technologie
-s and molecular dynamics have led to successful simula- tions of folding
- dynamics for (small) proteins at the ato- mistic level [8].
- Such simulations result in a large number of folding trajectories, each
- of which consists of a series of 3D conformations of the protein under
- simulation.
- These conformations are usually sampled regularly (e.g., every 200fs) during
- a simulation.
- In this article, we also refer to each conformation as a folding frame
- or simply a frame.
- Furthermore, to represent a protein conformation, we adopt one of the commonly
- adopted representation schemes, where a conformation is represented as
- a sequence of α-carbons (Cα) located in 3D space.
-\end_layout
-
 \end_inset
 
 
@@ -692,7 +524,6 @@ Revisar secciones 2.7, especialmente la 2.7.1.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Garreta2015"
-literal "true"
 
 \end_inset
 
@@ -736,7 +567,6 @@ nes más largas y de proteínas más grandes.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "LougherMarsder12"
-literal "true"
 
 \end_inset
 
@@ -749,7 +579,6 @@ s
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Shaw08"
-literal "true"
 
 \end_inset
 
@@ -769,7 +598,6 @@ Otras fuentes
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Wikipedia1963"
-literal "true"
 
 \end_inset
 
@@ -777,7 +605,6 @@ literal "true"
 \begin_inset CommandInset citation
 LatexCommand cite
 key "LougherMarsder12"
-literal "true"
 
 \end_inset
 
@@ -790,32 +617,59 @@ literal "true"
 \end_layout
 
 \begin_layout Subsection
+Algoritmos de Agrupamiento Clásicos (MMart)
+\end_layout
+
+\begin_layout Standard
+Hablar de k-means y k-medoides.
+\end_layout
+
+\begin_layout Subsection
 Algoritmos Rápido de Agrupamiento de Hobohn y Sander
 \end_layout
 
 \begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
 El algoritmo de Hobohm y Sander 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hobohm1992"
-literal "true"
 
 \end_inset
 
- se creó inicialmente para agrupar de forma rápida secuencias de proteínas.
- El algoritmo determina las secuencias más representativas a través de dos
- actividades: un ordenamiento y una selección rápida.
+ se creó inicialmente para agrupar de forma rápida secuencias de proteínas,
+ determinando las secuencias más representativas a través de dos actividades:
+ un ordenamiento y una selección rápida.
  En el ordenamiento, las secuencias se organizan por longitud en orden descendie
 nte, luego se toma la primera secuencia (la más larga) como representativa
  del primer grupo.
- En la selección rápida, se compara el resto de secuencias con la representativa
- y se las incorpora al grupo si son cercanas (ejemplo, si son similares
- a nivel de secuencias), de lo contrario, pasa a ser la representativa de
- un nuevo grupo y se hace lo mismo con el resto de secuencias hasta terminar.
+ Luego, en la selección rápida se compara el resto de secuencias con la
+ representativa y se las incorpora al grupo si son cercanas (ejemplo, si
+ son similares a nivel de secuencias), de lo contrario, la secuencia que
+ no es muy similar pasa a ser la representativa de un nuevo grupo y se hace
+ lo mismo con el resto de secuencias hasta terminar.
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Los aspectos determinantes del éxito del algoritmo son la relación de orden
  que se establezca al inicio y las propiedades que se tomen para comparar
  las secuencias.
@@ -830,50 +684,78 @@ Los aspectos determinantes del éxito del algoritmo son la relación de orden
  nuestro algoritmo de reducción de trayectorias de plegamiento.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Dos de las implementaciones más usadas de este algoritmo para agrupamiento
- rápido de secuencias son los programas CD-HIT 
+ rápido de secuencias son los programas CD-HIT y UCLUST.
+ El programa CD-HIT 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Weizhong2002"
-literal "true"
 
 \end_inset
 
- y UCLUST 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Edgar2010"
-literal "true"
-
-\end_inset
-
-.
- El programa CD-HIT realiza un ordenamiento por longitud de la secuencia
- como lo plantea el algoritmo de Hobhon, y para la selección utiliza un
- filtro de palabras cortas para comparar si dos secuencias son similares–evitand
-o el alineamiento de las mismas–y así asignarlas a un mismo grupo o crear
- uno nuevo.
+ realiza un ordenamiento por longitud de la secuencia como lo plantea el
+ algoritmo de Hobhon, y para la selección utiliza un filtro de palabras
+ cortas para comparar si dos secuencias son similares–evitando el alineamiento
+ de las mismas–y así asignarlas a un mismo grupo o crear uno nuevo.
  En el caso de secuencias de proteínas el programa usa por defecto una palabra
  de 10 aminoácidos o 
 \emph on
 decapeptido
 \emph default
 .
- En cambio el programa UCLUST utiliza para com parar las secuencias una
- función creada por los mismos autores que la llaman como USEARCH y que
- calcula la similitud entre las secuencias a partir de un alineamiento global.
+ En cambio el programa UCLUST 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Edgar2010"
+
+\end_inset
+
+ utiliza para comparar las secuencias una función creada por los mismos
+ autores que la llaman como USEARCH y que calcula la similitud entre las
+ secuencias a partir de un alineamiento global.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 \begin_inset Note Note
-status collapsed
+status open
 
 \begin_layout Plain Layout
+Describimos a continuación el algoritmo rápido de agrupamiento propuesto
+ por Hobhon & Sander, mostrando sus principales características, después
+ describimos como algunas herramientas han implementado este algoritmo para
+ agrupar secuencias de ADN o de Proteínas, y finalmente planteamos los elementos
+ que tomamos de este algoritmo y de sus implementaciones para crear nuestro
+ algoritmo para agrupar conformaciones de proteínas de trayectorias de simulació
+n 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Shaw08"
 
-\series bold
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Shaw08"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
 Algoritmo de Hobhon y Sander
 \end_layout
+
+\begin_layout Plain Layout
+\begin_inset Note Note
+status collapsed
 
 \begin_layout Description
 Liu09: Hobohm and Sander’s algorithm sorts all sequences by length in descending
@@ -922,6 +804,11 @@ Hobohm92: The first algorithm focuses on optimizing a par- ticular property
  works by successive thinning out of clusters of similar proteins.
  Both algorithms are generally applicable to other data bases in which criteria
  of similarity can be defined and relate to problems in graph theory
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -1298,206 +1185,6 @@ Datos y Métodos (LuisG)
 \end_layout
 
 \begin_layout Subsection
-Comparación de Estructuras de Proteínas
-\end_layout
-
-\begin_layout Standard
-\begin_inset Note Note
-status collapsed
-
-\begin_layout Plain Layout
-\align center
-
-\series bold
-TMscore and other metrics for structural comparison:
-\series default
- 
-\end_layout
-
-\begin_layout Description
-[
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Zhan2004"
-literal "true"
-
-\end_inset
-
-Seminal
-\begin_inset space ~
-\end_inset
-
-Paper] Scoring
-\begin_inset space ~
-\end_inset
-
-function
-\begin_inset space ~
-\end_inset
-
-for
-\begin_inset space ~
-\end_inset
-
-automated
-\begin_inset space ~
-\end_inset
-
-assessment
-\begin_inset space ~
-\end_inset
-
-of
-\begin_inset space ~
-\end_inset
-
-protein
-\begin_inset space ~
-\end_inset
-
-structure
-\begin_inset space ~
-\end_inset
-
-template
-\begin_inset space ~
-\end_inset
-
-quality
-\begin_inset space ~
-\end_inset
-
-Zhang
-\begin_inset space ~
-\end_inset
-
-Y.
-\begin_inset space ~
-\end_inset
-
-Skolnick
-\begin_inset space ~
-\end_inset
-
-J.: We have developed a new scoring function, the template modeling score
- (TM-score), to assess the quality of protein structure templates and predicted
- full-length models by extending the approaches used in Global Distance
- Test (GDT) and MaxSub.
- First, a protein size-dependent scale is exploited to eliminate the inherent
- protein size dependence of the previous scores and appropriately account
- for random protein structure pairs.
- Second, rather than setting specific distance cutoffs and calculating only
- the fractions with errors below the cutoff, all residue pairs in alignment/mode
-ling are evaluated in the proposed score.
- For comparison of various scoring functions, we have constructed a large-scale
- benchmark set of structure templates for 1489 small to medium size proteins
- using the threading program PROSPECTOR_3 and built the full-length models
- using MODELLER and TASSER.
- The TM-score of the initial threading alignments, compared to the GDT and
- MaxSub scoring functions, shows a much stronger correlation to the quality
- of the final full-length models.
- The TM-score is further exploited as an assessment of all 'new fold' targets
- in the recent CASP5 experiment and shows a close coincidence with the results
- of human-expert visual assessment.
- These data suggest that the TM-score is a useful complement to the fully
- automated assessment of protein structure predictions.
- © 2004 Wiley-Liss, Inc.
-\end_layout
-
-\begin_layout Description
-[https://zhanglab.ccmb.med.umich.edu/TM-score/]: TM-score is a metric for measuring
- the structural similarity of two protein models.
- It is designed to solve two major problems in the traditional metrics such
- as root-mean-square deviation (RMSD): (1) TM-score measures the global
- fold similarity and is less sensitive to the local structural variations;
- (2) magnitude of TM-score for random structure pairs is length-independent.
- TM-score has the value in (0,1], where 1 indicates a perfect match between
- two structures.
- Following strict statistics of structures in the PDB, scores below 0.17
- corresponds to randomly chosen unrelated proteins whereas with a score
- higher than 0.5 assume generally the same fold in SCOP/CATH.
- 
-\end_layout
-
-\begin_layout Description
-[https://en.wikipedia.org/wiki/Template_modeling_score] bioinformatics, the
- template modeling score or TM-score is a measure of similarity between
- two protein structures with different tertiary structures.
- The TM-score is intended as a more accurate measure of the quality of full-leng
-th protein structures than the often used RMSD and GDT measures.
- The TM-score indicates the difference between two structures by a score
- between ( 0 , 1 ] {
-\backslash
-displaystyle (0,1]} {
-\backslash
-displaystyle (0,1]}, where 1 indicates a perfect match between two structures
- (thus the higher the better).[1] Generally scores below 0.20 corresponds
- to randomly chosen unrelated proteins whereas structures with a score higher
- than 0.5 assume roughly the same fold.[2] A quantitative study [3] shows
- that proteins of TM-score = 0.5 have a posterior probability of 37% in the
- same CATH topology family and of 13% in the same SCOP fold family.
- The probabilities increase rapidly when TM-score > 0.5.
- The TM-score is designed to be independent of protein lengths.
- Contents
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Tanto para la primera y segunda fase de reducción utilizamos la medida de
- similitud entre estructuras de proteína llamada TM-score (Template Modeling
- score) 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Zhan2004"
-literal "false"
-
-\end_inset
-
-.
- Esta medida de similitud a diferencia de otras medidas ampliamente usadas
- en comparación de estructuras como el RMSD (Root Mean Square-Deviation)
- es más precisa ya que en el TM-score influyen poco sobre el puntaje final
- las secciones pequeñas de la proteína que alinean incorrectamente, tales
- como giros simples o términos flexibles, lo que reduce el chance de evaluacione
-s sesgadas.
-\end_layout
-
-\begin_layout Subsection
-Selección de Estructuras Representativas
-\end_layout
-
-\begin_layout Standard
-Las estructuras representativas de cada grupo o 
-\emph on
-bin
-\emph default
- resultante de la selección rápida de la primera fase se obtienen aplicando
- en cada uno de ellos un algoritmo de particionamiento alrededor de medoides
- (PAM) 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Park2009"
-literal "false"
-
-\end_inset
-
-.
- El algoritmo selecciona como representativa la estructura media o central
- de cada subgrupo resultante para la cual la suma de las distancias entre
- esta y las demás estructuras del subgrupo es mínima.
- Así, al final se obtienen por cada grupo o 
-\emph on
-bin
-\emph default
- inicial un conjunto reducido de estructuras que representan los eventos
- principales de esta sección de la trayectoria de plegamiento.
-\end_layout
-
-\begin_layout Subsection
 Trayectorias de Plegamiento de Proteínas
 \begin_inset CommandInset label
 LatexCommand label
@@ -1509,6 +1196,25 @@ name "subsec:Trayectorias-de-Plegamiento"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
 Para mostrar los resultados del algoritmo de reducción propuesto, aplicamos
  las reducciones a tres trayectorias de plegamiento de proteínas.
  La dos primeras corresponden a trayectorias cortas (200-300 conformaciones)
@@ -1520,7 +1226,6 @@ Probabilistic Roadmap Method
 \begin_inset CommandInset citation
 LatexCommand cite
 key "AmatoSong01"
-literal "true"
 
 \end_inset
 
@@ -1533,12 +1238,55 @@ literal "true"
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Shaw2011"
-literal "true"
 
 \end_inset
 
  para la proteína Trp-cage (PDB: 2JOF) y se caracteriza por ser una trayectoria
  mucho más extensa y detallada (más de 1 millón de conformaciones).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Trayectorias de Plegamiento de Proteínas generada por Anton
+\end_layout
+
+\begin_layout Standard
+Estas simulaciones fueron realizadas por en una supercomputador especialmente
+ diseñado para resolver problemas de Dinámica Molecular, llamada Anton 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{Shaw2008}
+\end_layout
+
+\end_inset
+
+, que es el método de más utilizado para simular el plegamiento de proteínas.
+ Las trayectorias puestas a disposición corresponden a las simulaciones
+ del plegamiento completo en solvente explicito de 12 proteínas de 10 a
+ 02 residuos 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite {Shaw2010}
+\end_layout
+
+\end_inset
+
+.
+ Por cada 
 \end_layout
 
 \begin_layout Section
@@ -1827,6 +1575,25 @@ Resultados y Discusión
 \end_layout
 
 \begin_layout Standard
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
 Para mostrar las reducciones que realiza nuestro algoritmo, presentamos
  aquí los resultados de la reducción realizada a tres trayectorias de proteínas.
  Las dos primeras son trayectorias cortas de menos de 300 conformaciones,
@@ -1835,7 +1602,7 @@ s.
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 En la Figura 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1873,7 +1640,7 @@ s azules), lo cual se logra después corregir en la reducción final.
  
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 \align center
 \begin_inset Float figure
 placement H
@@ -2092,7 +1859,7 @@ name "fig:dos-trayectorias"
 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Plain Layout
 Ahora, en la Figura 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -2117,6 +1884,11 @@ reference "subsec:Trayectorias-de-Plegamiento"
  los eventos principales, como lo destacamos en las reducciones anteriores,
  sin embargo la reducción global que toma los datos de la local, logra destacarl
 os cuando selecciona las conformaciones más representativas de cada partición.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
