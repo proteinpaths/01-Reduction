@@ -369,6 +369,7 @@ La mayoría de trabajos que encontramos en la literatura están orientados
 \end_layout
 
 \begin_layout Standard
+<<<<<<< HEAD
 .
  Una de las técnicas más usuadas para reducción de trayectorias de simulación
  de plegamiento de proteínas ha sido el análisis de componentes principales
@@ -376,10 +377,32 @@ La mayoría de trabajos que encontramos en la literatura están orientados
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Duan2013"
+=======
+Cuantificar la diferencia entre dos estrucutras de una misma proteína puede
+ parecer simple pero no es un problema trivial, y las distintas aproximaciones
+ para abordarlo están en contínua evolución.
+ En 1994 se originó CASP (Critical Assessment of techniques for protein
+ Structure Prediction) como un experimiento de comunidad científica, el
+ cual brinda la posibilidad de evaluar métodos en predicciones 
+\begin_inset Quotes cld
+\end_inset
+
+ciegas
+\begin_inset Quotes crd
+\end_inset
+
+ de proteínas recientemente resueltas pero sin publicar, convirtiendose
+ así en una medida del estado del arte en modelamiento de estructuras de
+ proteínas a partir de su secuencia de aminoácidos
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Moult2014"
+>>>>>>> 87b0615407a2c76f928c3946f4c123c01f86e041
 literal "false"
 
 \end_inset
 
+<<<<<<< HEAD
 , el cual transforma la estructura de la proteína desde un espacio N-dimensional
 –dado por los puntos de datos representados por las N coordenadas de sus
  átomos–a un espacio lineal K-dimensional (K < D) que corresponde a un nuevo
@@ -396,11 +419,134 @@ nales globales de la proteína.
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Das2006"
+=======
+.
+ Con esto se puede decir que los métodos de comparación de estructuras han
+ estado en desarrollo activo y se han usado en el campo de la modelación
+ computacional específicamente para medir la calidad de los modelos predichos.
+ Sin embargo, aunque estos modelos fueron originalmente desarollados para
+ evaluar estos modelos simulados, ahora su aplicación se extiende además
+ a la identificación, evaluación, entendimiento y predicción de cambios
+ conformacionales en proteínas, siendo esto un punto clave en su funcionamiento
+ biológico
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Kufareva2015"
+literal "true"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Dentro de los métodos más conocidos se puede citar el RMSD global, el GDS
+ y el TM-score.
+ A continuación se presenta una descripción general de cada uno de ellos,
+ así como los casos en los que unos resultan más adecuados que los demás.
+\end_layout
+
+\begin_layout Subsubsection
+RMSD
+\end_layout
+
+\begin_layout Standard
+La medida RMSD (Root Mean Square Deviation) es la medida cuantitativa de
+ similitud entre dos coordenadas atomicas superpuestas más usada comunmente.
+ Esta medida puede ser calculada para cualquier tipo y subset de atomos.
+ Un uso común es calcualr el RMSD sobre los carbonos alfa (Cα), lo que reduce
+ la cantidad de cálculos a realizar.
+ Una de las desventajas de RMSD radica en que es muy sensible a los errores.
+ Incluso si dos estructuras son casi identicas excepto un tramo, la superimposic
+ión de las estrucutras no puede ser realizada de la manera más efectiva
+ por el algoritmo que optimiza el RMSD global.
+\end_layout
+
+\begin_layout Standard
+Otro aspecto importante observado en esta métrica es un efecto observado
+ en sistemas macromoleculares muy grandes, donde los efectos de la dimensionalid
+ad producen lo que se conoce como 
+\begin_inset Quotes cld
+\end_inset
+
+la maldición de la dimensionalidad
+\begin_inset Quotes crd
+\end_inset
+
+, haciendo referencia a una capacidad decreciente para discriminar la diferencia
+ entre pares de conformaciones a medida que aumenta el tamaño del sistema
+ e impactando de esta manera el análisis basado en RMSD
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Sargsyan2017"
 literal "false"
 
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Subsubsection
+GDT
+\end_layout
+
+\begin_layout Standard
+También conocido como GDT TS (por total score).
+ Sirve para medir la similitud entre dos estructuras de proteínas con una
+ secuencias de aminoácidos idénticas pero una estructura terciaria distinta.
+ Es una métrica pensada para ser una medida más precisa que RMSD, la cual,
+ como se mencionó, es muy sensible a las regiones atípicas de modelados
+ pobres aun cuando el resto de la estructura sea razonablemente similar.
+ En general, cuanto más alto es el valor de GDT_TS, mejor es un modelo determina
+do comparado con una estructura de referencia.
+ El valor GDT se calcula como el conjunto más largo de átomos carbonos alfa
+ en la estructura modelo que se encuentran a una determinada distancia de
+ la proteína referencia.
+ Dicha distancia está determinada por un umbral específico.
+ En general el GDT score se calcula usando varios umbrales, y típicamente
+ un aumento en el umbral implica un aumento en el score.
+ Si esto no es así, es posible que sea un indicador de que la divergencia
+ entre la estructura referencia y el modelo es muy alta.
+ Uno de los problemas de la técnica es que la elección del valor de los
+ umbrales es subjetiva y necesitan ser ajustados manualmente para diferentes
+ categorías de objetivos de modelado
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Xu2010"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+TM-score
+\end_layout
+
+\begin_layout Standard
+TM-score (Template modeling score) es otra medida de similitud entre dos
+ proteínas que tienen distintas estructuras terciarias.
+ Fue concebida como una medida más precisa que RMSD y GDT.
+ TM-score representa la diferencia entre dos estructuras con un puntaje
+ que va de 0 a 1, donde 1 indica un emparejamiento perfecto de ambas proteínas.
+ Un puntaje de menos de 0.20 indica una comparación entre dos proteínas aleatoria
+s no relacionadas entre sí.
+ Esta métrica está diseñada para ser independiente de la longitud de las
+ proteínas que se están comparando
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhan2004"
+>>>>>>> 87b0615407a2c76f928c3946f4c123c01f86e041
+literal "false"
+
+\end_inset
+
+.
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> 87b0615407a2c76f928c3946f4c123c01f86e041
 \end_layout
 
 \begin_layout Standard
@@ -451,8 +597,13 @@ Yang et al.
  2007 
 \begin_inset CommandInset citation
 LatexCommand cite
+<<<<<<< HEAD
 key "Yang2007"
 literal "false"
+=======
+key "Zhan2004"
+literal "true"
+>>>>>>> 87b0615407a2c76f928c3946f4c123c01f86e041
 
 \end_inset
 
@@ -630,10 +781,64 @@ Simulaciones de Plegamiento
 \end_layout
 
 \begin_layout Standard
+<<<<<<< HEAD
 \begin_inset Note Note
 status open
 
 \begin_layout Itemize
+=======
+El estado nativo de una proteína se catracteriza por una cadena de aminoácidos
+ organizados en una estructura 3D estable y plegada.
+ Los enlaces de hidrógeno estabilizan la estructura; el core interno está
+ mayormente firmado por resíduos hidrofóbicos, mantenidos juntos por fuerzas
+ van der Waals, mientras que su superficie está formada principalmente por
+ cadenas laterales polares y cargadas.
+ La estructura tiene una muy baja entropía por el empaquetado de los residuos,
+ así como las cadenas laterales fijas que reducen la flexibilidad de la
+ proteína.
+ Para lograr el estado nativo, la proteína se pliega de una cadena no estructura
+da, (no plegada) con alta energía libre, a un estado estable final, co baja
+ o mínima energía libre.
+ Durante este proceso, llamado proceso de plegamiento, la proteína experimenta
+ interacciones sucesivas entre los atomos de sus resíduos (y también los
+ atomos del solvente envolvente) hasta alcanzar un estado estable que determina
+ en gran medida su función biológica.
+ Estas interacciones o fuerzas pueden ser de distintas formas: interacciones
+ cortas entre residuos cercanos, e interacciones largas involucrando partes
+ de la proteína que son muy distantes en la secuencia.
+\end_layout
+
+\begin_layout Subsubsection
+El problema de plegamiento de proteínas
+\end_layout
+
+\begin_layout Standard
+El problema de plegamiento de proteínas se enfoca en la manera en cómo una
+ proteína se pliega desde su secuencia de aminoácidos hasta una estructura
+ estable en 3D.
+ Es uno de los problemas más importantes, complejos y fascinantes de la
+ biología, y lleva más de 50 años en vigencia
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Dill2012a"
+literal "false"
+
+\end_inset
+
+.
+ Muchas áreas de la ciencia se han unido para buscar una solución, pero
+ hasta hoy únicamente se han obtenido aproximaciones de la estructura 3D.
+ El proceso de plegamiento es relevante para dos problemas distintos pero
+ relacionados entre ellos: la predicción de la estructura 3D a partir de
+ su secuencia de aminoácidos; y entender el proceso subyacente del proceso
+ de plegamiento.
+ Para el primero el interés radica únicamente en la prediccoón de la estructura
+ de una proteína objetivo desconocida.
+ Para el segundo lo importante es entender los mecanismos, las fuerzas y
+ las interacciones que dirigen las proteínas para alzanzar su estado estable
+ final.
+\end_layout
+>>>>>>> 87b0615407a2c76f928c3946f4c123c01f86e041
 
 \series bold
 [lgarreta2015]
@@ -649,6 +854,7 @@ status open
  PRM implemented in the Parasol Folding Server.
 \end_layout
 
+<<<<<<< HEAD
 \begin_layout Itemize
 An MD computation simulates the motion of a collection of atoms (the chemical
  system) over a period of time accord- ing to the laws of classical physics.1
@@ -681,22 +887,232 @@ s and molecular dynamics have led to successful simula- tions of folding
  a sequence of α-carbons (Cα) located in 3D space.
 \end_layout
 
-\end_inset
-
-
+=======
+\begin_layout Standard
+Las predicciones de la estructura de una proteína se han llevado a cabo
+ principalmente usando técnicas de comparación y simulación.
+ La comparación es útil cuando existe información de otras proteínas con
+ características similares a la objetivo.
+ En caso contrario la técnica a usar es la simulación del proceso.
+ Estas simulaciones se realizan principalmente usando dinámica molecular,
+ la cual es una técnica computacional que permite predecir propiedades estáticas
+ y dinámicas de la proteína a partir de las interacciones entre sus moléculas.
+ Además de esta técnica hay otros métodos de simulación y estudio del plegamient
+o de la proteína, tal como el Probabilistic Roadmap Method que construye
+ la ruta de plegamiento de la proteína o la secuencia de eventos que la
+ proteína probablemente sigue para alzanzar su estado nativo.
+ 
 \end_layout
 
 \begin_layout Standard
-Revisar secciones 2.7, especialmente la 2.7.1.
- de Tesis LG 
+Si bien es cierto que las técnicas para estudiar el plegamiento de proteínas
+ ha mejorado en los últimos tiempos, aún se encuentran limitados en cuanto
+ a los detalles del mismo.
+ Por ejemplo, los estudios experimentales de plegamiento de proteínas se
+ ven obstaculizados por el hecho de que sólo se pueden obtener datos estructural
+es de baja resolución con una resolución temporal suficiente
 \begin_inset CommandInset citation
 LatexCommand cite
-key "Garreta2015"
-literal "true"
+key "Freddolino2010c"
+literal "false"
 
 \end_inset
 
+.
+ Por esta razón, varias estrategias computacionaes han emergido como enfoques
+ complementarios, siendo en algunos casos el único mecanismo para obtener
+ una buena aproximación de los detalles de la dinámica de una proteína.
+ Existen diversas técnicas de simulación que permiten el estudio del plegamiento
+ de proteínas desde diferentes enfoques.
+ Se describen en esta sección tres de ellas.
+ Una técnica con nivel de detalle atómico como la Dinámica Molecular; y
+ fos técnicas con un nivel de detalle más reducido: Una técnica de muestreo
+ llamada Probabilistic Roadmap Method (PRM) y una técnica que usa un enfoque
+ de fragmentos.
+\end_layout
 
+\begin_layout Subsubsection
+Dinámica Molecular
+\end_layout
+
+\begin_layout Standard
+El la actualidad la técnica de Dinámica Molecular (DM) es una de las principales
+ herramientas para el estudio de moléculas y produce movimientos físicos
+ de átomos altamente realísticos, así como trajectorias de plegamiento de
+ proteínas
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Pande2008"
+literal "false"
+
+\end_inset
+
+.
+ Uno de us principales resultados es una serie de 
+\emph on
+snapshots 
+\emph default
+de las posiciones y velocidades de los átomos como una función del tiempo,
+ representando una trayectoria del sistema, lo que corresponde a una ruta
+ de transición de alta resolución.
+ DM lleva la traza de las posiciones y las velocidades de los átomos de
+ la proteína y como interactúan entre ellos y responden a fuerzas externas.
+ DM calcula el movimiento de todas las partículas de las proteínas intergrando
+ numéricamente las ecuaciones de movimiento de Newton de manera simultánea
+ y repetidamente en pequeños pasos de tiempo durante un periodo determinado.
+\end_layout
+
+\begin_layout Standard
+Modelar las fuerzas en este proceso requiere la definición de una función
+ de potencial muy detallada y precisa en la forma de ecuaciones y parámetros
+ que describan las interacciones entre las partículas de un sistema y retornen
+ su energía potencial como función de sus conformaciones.
+ Si bien DM produce simulaciones físicamente realísticas, es computacionalmente
+ costoso y solamente se pueden simular proteínas pequeñas en tiempos factibiles,
+ convirtiéndose de esta manera en un desafío computacional la simulación
+ de proteínas más grandes en escalas de milisegundos
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Garreta2015,Chowdhury2003"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Probabilistic Roadmap Method (PRM)
+\end_layout
+
+\begin_layout Standard
+El método de PRM es una adaptación para el plegamiento de proteínas de otro
+ desarrollado para la planeación de movimiento robótico en un 
+\begin_inset Quotes cld
+\end_inset
+
+robót
+\begin_inset Quotes crd
+>>>>>>> 87b0615407a2c76f928c3946f4c123c01f86e041
+\end_inset
+
+ que comienza en una posición inicial y busca una ruta de movimientos factible
+ para alcanzar una posición objetivo
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Amato2002,Apaydin2003"
+literal "false"
+
+\end_inset
+
+.
+ En el contexto de plegamiento de proteínas, se puede interpretar como el
+ problema de encontrar un camino de plegamiento factible que una proteína
+ pueda seguir desde un estado no plegado hasta su estado nativo.
+ El método PRM modela el paisaje energético (
+\emph on
+landscape
+\emph default
+) de una proteína como hoja de ruta definida por un grafo de movimiento
+ válidos en el 
+\emph on
+landscape
+\emph default
+.
+ Los nodos representan estados (conformaciones de proteínas) y las aristas
+ representan transiciones (cambios de estado).
+ PRM hace un muestreo de todas las conformaciones válidas (espacio conformaciona
+l) de la proteína y las agrega a la hoja de ruta.
+ Luego conecta los vecinos donde las transiciones son válidas.
+ Finalmente extrae rutas de plegamiento de la hoja de ruta usando un algoritmo
+ de búsqueda el cual encuentra la secuencia de posibles estados intermedios
+ que conecta las conformaciones inicial y objetivo, esto es, la ruta ed
+ plegamiento de la proteína.
+\end_layout
+
+\begin_layout Standard
+PRM es menos realístico físicamente que MD, ya que en la búsqueda de 
+\begin_inset Quotes cld
+\end_inset
+
+todas
+\begin_inset Quotes crd
+\end_inset
+
+ las conformaciones posibles en realidad se tienen en cuenta ciertas restriccion
+es por la imposinilidad técnica de tener en cuenta la totalidad de comformacione
+s.
+ Generalmente se usa una alteración en los ángulos dihédricos para generar
+ distintas conformaciones, o se establecen transiciones dependiendo de una
+ evaluación de la energía potencial de la nueva conformación, eligiéndose
+ esta si presenta una reducción energética.
+ Por ser menos realísta, este método es menos demandante computacionalmente,
+ y ha sido usado para estudiar problemas de alta dimensión en dominios molecular
+es
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Thomas2006,Chiang2010,Garreta2015"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Métodos de ensamblaje de fragmentos
+\end_layout
+
+\begin_layout Standard
+La motivación para estos métodos es que las secuencias locales en la proteína
+ tienen preferencias seleccionadas para estructuras locales específicas,
+ y que la estructura de la proteína completa es el resutado de la interacción
+ de aquellas estructuras locales y las no locales.
+ El método Rossetta 
+\emph on
+ab initio 
+\emph default
+es uno de los ejemplos más exitosos de este enfoque
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Bonneau2002"
+literal "false"
+
+\end_inset
+
+.
+ Rosetta obtiene las estructuras locales a partir de una librería de estructuras
+ cocidas observadas en proteínas resueltas (por ejemplo el 
+\emph on
+Protein Data Bank
+\emph default
+) y las combina de manera aleatoria para ensamblar las conformaciones individual
+es
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Garreta2015"
+<<<<<<< HEAD
+literal "true"
+=======
+literal "false"
+>>>>>>> 87b0615407a2c76f928c3946f4c123c01f86e041
+
+\end_inset
+
+.
+ La búsqueda Monte Carlo de recocido simulado se usa para combinar las estructur
+as locales, y se usa una función de puntaje que evalúa que tan adecuada
+ es a través de una función basada en estadísticas conformacionales de estructur
+as conocidas
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Rohl2004a"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -794,11 +1210,150 @@ Algoritmos Rápido de Agrupamiento de Hobohn y Sander
 \end_layout
 
 \begin_layout Standard
+<<<<<<< HEAD
 El algoritmo de Hobohm y Sander 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Hobohm1992"
 literal "true"
+=======
+Los algoritmos de agrupamiento (o de 
+\emph on
+clustering
+\emph default
+, como son generalmente conocidos) buscan organizar un conjunto de objetos
+ en grupos significativos.
+ Estos grupos pueden ser disyuntos, sobrelapados u organizados de una manera
+ jerárquica.
+ El elemento clave en un agrupamiento es descubrir grupos que tienen un
+ significado.
+ El significado dependerá del problema particular.
+ Los algoritmos de 
+\emph on
+clustering 
+\emph default
+constituyen una herramienta exploratoria para analizar conjuntos de datos
+ extensos, y tienen aplicaciones en múchas áreas
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Zhao2005"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+K-Means
+\end_layout
+
+\begin_layout Standard
+K-Means es un tipo de aprendizaje no supervisado el cual es usado cuando
+ se quiere categorizar datos.
+ La meta del algoritmo es encontrar grupos en los datos, siendo K el numero
+ de grupos.
+ El algoritmo asigna de manera iterativa cada punto de los datos a uno de
+ los K grupos basado en las características que le son provistas.
+ Los puntos son particionados de acuerdo a una similitud entre las característic
+as.
+ Este algoritmo agrupa los datos basado en su cercanía de acuerdo a la distancia
+ euclidiana.
+ Como salida, el algoritmo retorna los centroides de los K clusters, los
+ cuales pueden ser usados para etiquetar nuevos datos..
+ El método tiene algunos puntos débiles, por ejemplo, encontrar el valor
+ de K puede ser difícil y los resultados finales varían debido a las inicializac
+iones aleatorias de las particiones.
+ Otro aspecto importante es que el algoritmo K-means es sensible a datos
+ atípicos, puesto que una media es influenciada fácilmente por valores extremos
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Arora2016"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+K-Medoides
+\end_layout
+
+\begin_layout Standard
+El algoritmo K-Medoides es también un algoritmo de particionamiento y por
+ tanto intenta minimizar la distancia entre puntos designados para estar
+ en un mismo cluster y un punto designado como el centro del mismo.
+\end_layout
+
+\begin_layout Standard
+K-Medoides es una variante de K-means la cual es más robusta a ruidos y
+ datos atípicos.
+ En lugar de usar el punto de la media como centro del cluster, K-Medoides
+ usa un punto deal en el cluster para representarlo.
+ Un Medoide es el objeto localizado más centralmente en el cluster, con
+ una suma mínima de distancia a otros puntos
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Jin2010"
+literal "false"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Algoritmos Rápidos de Agrupamiento (LuisG)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status collapsed
+
+\begin_layout Plain Layout
+Describimos a continuación el algoritmo rápidos de agrupamiento propuesto
+ por Hobhon & Sander, mostrando sus principales características, después
+ describimos como algunas herramientas han implementado este algoritmo para
+ agrupar secuencias de ADN o de Proteínas, y finalmente planteamos los elementos
+ que tomamos de este algoritmo y de sus implementaciones para crear nuestro
+ algoritmo para agrupar conformaciones de proteínas de trayectorias de simulació
+n 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Shaw08"
+literal "true"
+
+\end_inset
+
+
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Shaw08"
+literal "true"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Algoritmo de Hobhon y Sander
+\end_layout
+
+\begin_layout Plain Layout
+Este algoritmo se creó inicialmente para agrupar de forma rápida secuencias
+ de proteínas 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{Hobohm92}
+\end_layout
+>>>>>>> 87b0615407a2c76f928c3946f4c123c01f86e041
 
 \end_inset
 
